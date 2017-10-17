@@ -78,7 +78,7 @@ div.dataTables_wrapper {
 															<td class="col-md-2">
 																<button type="button" id="goRegist" value="goRegist"
 																	class="btn btn-primary" style="width: 150px"
-																	th:onclick="'javascript:location.href='+'\''+@{/authorization/person/goRegist}+'\''">新規</button>
+																	th:onclick="'javascript:location.href='+'\''+@{/authorization/personjobhistory/goRegist}+'\''">新規</button>
 															</td>
 														</tr>
 													</table>
@@ -94,6 +94,14 @@ div.dataTables_wrapper {
 															<tr>
 																<th>No.</th>
 																<th>従業員番号</th>
+																<th>主務/兼務</th>
+																<th>発令日</th>
+																<th>異動区分</th>
+																<th>異動理由</th>
+																<th>部門</th>
+																<th>役職</th>
+																<th>勤務地</th>
+																<th>グループ</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -103,11 +111,43 @@ div.dataTables_wrapper {
 																	th:value="${iterStat.index}"
 																	th:text="${iterStat.index} + 1"></td>
 																<td><a
-																	th:href="@{/authorization/person/goUpdate/}+${content.personNum}"><span
+																	th:href="@{/authorization/personjobhistory/goUpdate/}+${content.personNum}+'/'+${content.appointment}+'/'+${content.effectiveDateString}"><span
 																		th:id="'page['+${iterStat.index}+'].personNum'"
 																		th:name="'page['+${iterStat.index}+'].personNum'"
 																		th:value="${content.personNum}"
 																		th:text="${content.personNum}"></span></a></td>
+																<td th:id="'page['+${iterStat.index}+'].appointment'"
+																	th:name="'page['+${iterStat.index}+'].appointment'"
+																	th:value="${content.appointment}"
+																	th:text="${content.appointment}"></td>
+																<td
+																	th:id="'page['+${iterStat.index}+'].effectiveDateString'"
+																	th:name="'page['+${iterStat.index}+'].effectiveDateString'"
+																	th:value="${content.effectiveDateString}"
+																	th:text="${content.effectiveDateString}"></td>
+																<td th:id="'page['+${iterStat.index}+'].action'"
+																	th:name="'page['+${iterStat.index}+'].action'"
+																	th:value="${content.action}"
+																	th:text="${content.action}"></td>
+																<td th:id="'page['+${iterStat.index}+'].actionReason'"
+																	th:name="'page['+${iterStat.index}+'].actionReason'"
+																	th:value="${content.actionReason}"
+																	th:text="${content.actionReason}"></td>
+																<td th:id="'page['+${iterStat.index}+'].department'"
+																	th:name="'page['+${iterStat.index}+'].department'"
+																	th:value="${content.department}"
+																	th:text="${content.department}"></td>
+																<td th:id="'page['+${iterStat.index}+'].job'"
+																	th:name="'page['+${iterStat.index}+'].job'"
+																	th:value="${content.job}" th:text="${content.job}"></td>
+																<td th:id="'page['+${iterStat.index}+'].location'"
+																	th:name="'page['+${iterStat.index}+'].location'"
+																	th:value="${content.location}"
+																	th:text="${content.location}"></td>
+																<td th:id="'page['+${iterStat.index}+'].group1'"
+																	th:name="'page['+${iterStat.index}+'].group1'"
+																	th:value="${content.group1}"
+																	th:text="${content.group1}"></td>
 															</tr>
 														</tbody>
 													</table>
@@ -137,8 +177,8 @@ div.dataTables_wrapper {
 				scrollY : "390px",
 				scrollX : true,
 				scrollCollapse : true,
-				paging : false,
-				searching : false,
+				paging : true,
+				searching : true,
 			});
 
 			new $.fn.dataTable.FixedColumns(table, {

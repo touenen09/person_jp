@@ -50,4 +50,10 @@ public class PersonFacadeImpl implements PersonFacade {
 		return personTableService.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public int deleteByPrimaryKey(String personNum) {
+
+		return personTableService.deleteByPrimaryKey(personNum);
+	}
+
 }

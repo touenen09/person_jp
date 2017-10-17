@@ -32,19 +32,19 @@ public class PersonJobHistoryTableServiceImpl implements PersonJobHistoryTableSe
 	@Override
 	public int deleteByPrimaryKey(PersonJobHistoryTableKey key) {
 
-		return 0;
+		return personJobHistoryTableMapper.deleteByPrimaryKey(key);
 	}
 
 	@Override
 	public int insert(PersonJobHistoryTable record) {
 
-		return 0;
+		return personJobHistoryTableMapper.insert(record);
 	}
 
 	@Override
 	public int insertSelective(PersonJobHistoryTable record) {
 
-		return 0;
+		return personJobHistoryTableMapper.insertSelective(record);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class PersonJobHistoryTableServiceImpl implements PersonJobHistoryTableSe
 	@Override
 	public PersonJobHistoryTable selectByPrimaryKey(PersonJobHistoryTableKey key) {
 
-		return null;
+		return personJobHistoryTableMapper.selectByPrimaryKey(key);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class PersonJobHistoryTableServiceImpl implements PersonJobHistoryTableSe
 	@Override
 	public int updateByPrimaryKey(PersonJobHistoryTable record) {
 
-		return 0;
+		return personJobHistoryTableMapper.updateByPrimaryKey(record);
 	}
 
 }

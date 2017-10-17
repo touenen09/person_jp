@@ -16,4 +16,6 @@ public interface PersonFacade {
 	PersonTable selectByPrimaryKey(String personNum);
 
 	int updateByPrimaryKey(PersonTable record);
+
+	int deleteByPrimaryKey(String personNum);
 }

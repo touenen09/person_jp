@@ -77,4 +77,12 @@ public class PersonController {
 		personFacade.updateByPrimaryKey(personTable);
 		return "redirect:/authorization/person/goIndex/1";
 	}
+
+	@RequestMapping("/doDelete")
+	public String doDelete(PersonTableForm form, BindingResult result, Model model) {
+
+		String personNum = form.getPersonNum();
+		personFacade.deleteByPrimaryKey(personNum);
+		return "redirect:/authorization/person/goIndex/1";
+	}
 }

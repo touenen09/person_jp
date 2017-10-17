@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>従業員マスタ管理</title>
+<title>従業員ジョブ歴史マスタ管理</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport' />
@@ -42,15 +42,16 @@ div.dataTables_wrapper {
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>従業員</h1>
+				<h1>従業員ジョブ歴史</h1>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
 					<div class="col-md-12">
-						<form id="personTableForm" th:object="${personTableForm}"
-							method="post" class="form-horizontal">
+						<form id="personJobHistoryTableForm"
+							th:object="${personJobHistoryTableForm}" method="post"
+							class="form-horizontal">
 							<div th:if="${sysErrMsg} != null" class="col-md-4"></div>
 							<div th:if="${sysErrMsg} != null"
 								class="calloutcustomized callout-danger col-md-8"
@@ -71,18 +72,31 @@ div.dataTables_wrapper {
 															<td class="col-md-2"><input type="text"
 																class="form-control" id="personNum"
 																th:field="*{personNum}" maxlength="20" /></td>
-															<td class="col-md-2">顔写真</td>
+															<td class="col-md-2">主務/兼務</td>
 															<td class="col-md-2"><input type="text"
-																class="form-control" id="photo" th:field="*{photo}"
+																class="form-control" id="appointment"
+																th:field="*{appointment}" maxlength="20" /></td>
+															<td class="col-md-2"></td>
+															<td class="col-md-2"></td>
+														</tr>
+														<tr>
+															<td class="col-md-2">発令日</td>
+															<td class="col-md-2"><input type="text"
+																class="form-control" id="effectiveDateString"
+																th:field="*{effectiveDateString}" maxlength="8"
+																placeholder="YYYYMMDD" /></td>
+															<td class="col-md-2">異動区分</td>
+															<td class="col-md-2"><input type="text"
+																class="form-control" id="action" th:field="*{action}"
 																maxlength="20" /></td>
 															<td class="col-md-2"></td>
 															<td class="col-md-2"></td>
 														</tr>
 														<tr>
-															<td class="col-md-2">氏名</td>
+															<td class="col-md-2">異動理由</td>
 															<td class="col-md-2"><input type="text"
-																class="form-control" id="name" th:field="*{name}"
-																maxlength="20" /></td>
+																class="form-control" id="actionReason"
+																th:field="*{actionReason}" maxlength="20" /></td>
 															<td class="col-md-2">部門</td>
 															<td class="col-md-2"><input type="text"
 																class="form-control" id="department"
@@ -95,22 +109,20 @@ div.dataTables_wrapper {
 															<td class="col-md-2"><input type="text"
 																class="form-control" id="job" th:field="*{job}"
 																maxlength="20" /></td>
-															<td class="col-md-2">キャリアバンド</td>
-															<td class="col-md-2"><input type="text"
-																class="form-control" id="grade" th:field="*{grade}"
-																maxlength="20" /></td>
-															<td class="col-md-2"></td>
-															<td class="col-md-2"></td>
-														</tr>
-														<tr>
-															<td class="col-md-2">職責</td>
-															<td class="col-md-2"><input type="text"
-																class="form-control" id="gradeStep"
-																th:field="*{gradeStep}" maxlength="20" /></td>
 															<td class="col-md-2">勤務地</td>
 															<td class="col-md-2"><input type="text"
 																class="form-control" id="location"
 																th:field="*{location}" maxlength="20" /></td>
+															<td class="col-md-2"></td>
+															<td class="col-md-2"></td>
+														</tr>
+														<tr>
+															<td class="col-md-2">グループ</td>
+															<td class="col-md-2"><input type="text"
+																class="form-control" id="group1" th:field="*{group1}"
+																maxlength="20" /></td>
+															<td class="col-md-2"></td>
+															<td class="col-md-2"></td>
 															<td class="col-md-2"></td>
 															<td class="col-md-2"></td>
 														</tr>
@@ -123,9 +135,8 @@ div.dataTables_wrapper {
 														style="border: 0; margin: 0; cellSpacing: 0; cellPadding: 0;">
 														<tr>
 															<td class="col-md-2">
-																	<button type="button" id="goRegist" value="goRegist"
-																	class="btn btn-primary" style="width: 150px"
-																	th:onclick="'javascript:location.href='+'\''+@{/authorization/person/goIndex/2}+'\''">戻る</button>
+																<button type="button" id="goIndex"
+																	class="btn btn-primary" style="width: 150px">戻る</button>
 															</td>
 															<td class="col-md-2">
 																<button id="doRegist" type="button"
@@ -133,7 +144,10 @@ div.dataTables_wrapper {
 																<button id="doUpdate" type="button"
 																	class="btn btn-primary" th:style="${doUpdateButtonCss}">更新</button>
 															</td>
-															<td class="col-md-8" colspan="4"></td>
+															<td class="col-md-2"><button id="doDelete"
+																	type="button" class="btn btn-primary"
+																	th:style="${doUpdateButtonCss}">削除</button></td>
+															<td class="col-md-6" colspan="2"></td>
 														</tr>
 													</table>
 												</div>
@@ -158,15 +172,22 @@ div.dataTables_wrapper {
 	/*<![CDATA[*/
 	$(document).ready(
 		function() {
-			$('#personTableForm').focus();
+			$('#personJobHistoryTableForm').focus();
+
+			$('#goIndex').bind(
+					'click',
+					function() {
+						location.href = /*[[@{/authorization/personjobhistory/goIndex/2}]]*/;
+						$('#goIndex').prop('disabled', true);
+					});
 
 			$('#doRegist').bind(
 					'click',
 					function() {
 						// if (confirm("登録してよろしいですか？")) {
-							$('#personTableForm').attr("action",
-								/*[[@{/authorization/person/doRegist}]]*/);
-							$('#personTableForm').submit();
+							$('#personJobHistoryTableForm').attr("action",
+								/*[[@{/authorization/personjobhistory/doRegist}]]*/);
+							$('#personJobHistoryTableForm').submit();
 							$('#doRegist').prop('disabled', true);
 						// }else{
 							// doNothing
@@ -177,10 +198,23 @@ div.dataTables_wrapper {
 					'click',
 					function() {
 						// if (confirm("更新してよろしいですか？")) {
-							$('#personTableForm').attr("action",
-								/*[[@{/authorization/person/doUpdate}]]*/);
-							$('#personTableForm').submit();
+							$('#personJobHistoryTableForm').attr("action",
+								/*[[@{/authorization/personjobhistory/doUpdate}]]*/);
+							$('#personJobHistoryTableForm').submit();
 							$('#doUpdate').prop('disabled', true);
+						// }else{
+							// doNothing
+						// }
+					});
+
+			$('#doDelete').bind(
+					'click',
+					function() {
+						// if (confirm("更新してよろしいですか？")) {
+							$('#personJobHistoryTableForm').attr("action",
+								/*[[@{/authorization/personjobhistory/doDelete}]]*/);
+							$('#personJobHistoryTableForm').submit();
+							$('#doDelete').prop('disabled', true);
 						// }else{
 							// doNothing
 						// }
