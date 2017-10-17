@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>従業員マスタ管理</title>
+<meta
+	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+	name='viewport' />
+
+<meta th:replace="head-cssjs" />
+
+<style class="init">
+<!--
+.checkbox label, .radio label {
+	padding-right: 10px;
+}
+
+html, body {
+	overflow: hidden;
+}
+
+.fieldError {
+	border-color: #dd4b39;
+}
+
+/* Ensure that the demo table scrolls */
+th, td {
+	white-space: nowrap;
+}
+
+div.dataTables_wrapper {
+	margin: 0 auto;
+}
+-->
+</style>
+
+</head>
+<body class="skin-blue">
+	<div class="wrapper">
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>従業員</h1>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-md-12">
+						<form id="deptSearchForm" th:object="${deptSearchForm}"
+							method="post" class="form-horizontal">
+							<div th:if="${sysErrMsg} != null" class="col-md-4"></div>
+							<div th:if="${sysErrMsg} != null"
+								class="calloutcustomized callout-danger col-md-8"
+								style="margin-top: -28px;">
+								<p th:text="${sysErrMsg}"></p>
+							</div>
+							<div id="maincontent" class="box box-primary"
+								style="overflow-y: auto; overflow-x: hidden;">
+								<div class="box-body">
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="row">
+												<div class="col-md-12">
+													<table class="table-condensed"
+														style="border: 0; margin: 0; cellSpacing: 0; cellPadding: 0;">
+														<tr>
+															<td class="col-md-2">マスタ</td>
+															<td class="col-md-2"><input type="text"
+																class="form-control" id="deptCode"
+																th:field="*{deptCode}" maxlength="20" /></td>
+															<td class="col-md-4" colspan="2"><input type="text"
+																class="form-control" id="depName" th:field="*{depName}"
+																maxlength="20" /></td>
+															<td class="col-md-2"></td>
+															<td class="col-md-2"></td>
+														</tr>
+													</table>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<table class="table-condensed"
+														style="border: 0; margin: 0; cellSpacing: 0; cellPadding: 0;">
+														<tr>
+															<td class="col-md-2">
+																<button id="doSearch" type="button"
+																	class="btn btn-primary" style="width: 150px">検索</button>
+															</td>
+															<td class="col-md-2">
+																<button type="button" id="checkDownload"
+																	class="btn btn-primary" style="width: 150px">ダウンロード</button>
+															</td>
+															<td class="col-md-2">
+																<button id="doSend" type="button"
+																	class="btn btn-primary" style="width: 150px">送信</button>
+															</td>
+															<td class="col-md-2"></td>
+															<td class="col-md-2"></td>
+															<td class="col-md-2">
+																<button type="button" id="goRegist" value="goRegist"
+																	class="btn btn-primary" style="width: 150px"
+																	th:onclick="'javascript:location.href='+'\''+@{/cmp0090/goRegist}+'\''">新規登録</button>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+
+											<div th:if="${page} != null and ${ph} != null " class="row">
+												<div class="col-md-12">
+													<p class="pageList">
+														检索结果 <span th:text="${page.totalElements}"></span>件 <span
+															class="prev"
+															th:attr="style=${ph.hiddenFirst} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=0,size=${page.size})}"
+															id="searchIdFirst">&lt;&lt;</a></span> <span class="prev"
+															th:attr="style=${ph.hiddenPrev} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=${page.number - 1},size=${page.size})}">&lt;</a></span>
+														<span th:text="${page.number + 1}"></span>&nbsp;/&nbsp;<span
+															th:text="${page.totalPages}"></span> 页 <span class="next"
+															th:attr="style=${ph.hiddenNext} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=${page.number + 1},size=${page.size})}">&gt;</a></span>
+														<span class="next"
+															th:attr="style=${ph.hiddenLast} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=${page.totalPages - 1},size=${page.size})}">&gt;&gt;</a></span>
+													</p>
+												</div>
+											</div>
+											<div class="box box-success"
+												th:attrappend="style=${page == null ? 'display: none;' : ''}">
+												<div class="col-md-12" style="width: 99%;">
+													<table id="searchResult"
+														class="table table-condensed table-striped table-hover">
+														<thead>
+															<tr>
+																<th>No.</th>
+																<th>変更</th>
+																<th>部門コード</th>
+																<th>開始日</th>
+																<th>終了日</th>
+																<th>部門名</th>
+																<th>組織階層</th>
+																<th>部門パス</th>
+																<th>最下層区分</th>
+																<th>伝票入力可否</th>
+																<th>作成日時</th>
+																<th>作成者名</th>
+																<th>更新日時</th>
+																<th>更新者名</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:each="content, iterStat : ${page}">
+																<td th:id="${iterStat.index}"
+																	th:name="${iterStat.index}"
+																	th:value="${iterStat.index}"
+																	th:text="${iterStat.index} + 1"></td>
+																<td><a
+																	th:href="@{/cmp0090/goUpdate/}+${content.deptCode}+'/'+${#dates.format(content.startDate,'yyyyMMdd')}">変更</a></td>
+																<td th:id="'page['+${iterStat.index}+'].deptCode'"
+																	th:name="'page['+${iterStat.index}+'].deptCode'"
+																	th:value="${content.deptCode}"
+																	th:text="${content.deptCode}"></td>
+																<td th:id="'page['+${iterStat.index}+'].startDate'"
+																	th:name="'page['+${iterStat.index}+'].startDate'"
+																	th:value="${content.startDate}"
+																	th:text="${content.startDate}!=null?${#dates.format(content.startDate,'yyyy/MM/dd')}:''"></td>
+																<td th:id="'page['+${iterStat.index}+'].endDate'"
+																	th:name="'page['+${iterStat.index}+'].endDate'"
+																	th:value="${content.endDate}"
+																	th:text="${content.endDate}!=null?${#dates.format(content.endDate,'yyyy/MM/dd')}:''"></td>
+																<td th:id="'page['+${iterStat.index}+'].depName'"
+																	th:name="'page['+${iterStat.index}+'].depName'"
+																	th:value="${content.depName}"
+																	th:text="${content.depName}"></td>
+																<td th:id="'page['+${iterStat.index}+'].deptLayer'"
+																	th:name="'page['+${iterStat.index}+'].deptLayer'"
+																	th:value="${content.deptLayer}"
+																	th:text="${content.deptLayer}"></td>
+																<td th:id="'page['+${iterStat.index}+'].deptPsth'"
+																	th:name="'page['+${iterStat.index}+'].deptPsth'"
+																	th:value="${content.deptPsth}"
+																	th:text="${content.deptPsth}"></td>
+																<td th:id="'page['+${iterStat.index}+'].lowSeg'"
+																	th:name="'page['+${iterStat.index}+'].lowSeg'"
+																	th:value="${content.lowSeg}"
+																	th:text="${content.lowSeg}"></td>
+																<td th:id="'page['+${iterStat.index}+'].slitYn'"
+																	th:name="'page['+${iterStat.index}+'].slitYn'"
+																	th:value="${content.slitYn}"
+																	th:text="${content.slitYn}"></td>
+																<td th:id="'page['+${iterStat.index}+'].createDate'"
+																	th:name="'page['+${iterStat.index}+'].createDate'"
+																	th:value="${content.createDate}"
+																	th:text="${content.createDate}!=null?${#dates.format(content.createDate,'yyyy/MM/dd')}:''"></td>
+																<td th:id="'page['+${iterStat.index}+'].creator'"
+																	th:name="'page['+${iterStat.index}+'].creator'"
+																	th:value="${content.creator}"
+																	th:text="${content.creator}"></td>
+																<td th:id="'page['+${iterStat.index}+'].updateDate'"
+																	th:name="'page['+${iterStat.index}+'].updateDate'"
+																	th:value="${content.updateDate}"
+																	th:text="${content.updateDate}!=null?${#dates.format(content.updateDate,'yyyy/MM/dd')}:''"></td>
+																<td th:id="'page['+${iterStat.index}+'].updater'"
+																	th:name="'page['+${iterStat.index}+'].updater'"
+																	th:value="${content.updater}"
+																	th:text="${content.updater}"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div th:if="${page} != null and ${ph} != null " class="row">
+												<div class="col-md-12">
+													<p class="pageList">
+														检索结果 <span th:text="${page.totalElements}"></span>件 <span
+															class="prev"
+															th:attr="style=${ph.hiddenFirst} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=0,size=${page.size})}"
+															id="searchIdFirst">&lt;&lt;</a></span> <span class="prev"
+															th:attr="style=${ph.hiddenPrev} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=${page.number - 1},size=${page.size})}">&lt;</a></span>
+														<span th:text="${page.number + 1}"></span>&nbsp;/&nbsp;<span
+															th:text="${page.totalPages}"></span> 页 <span class="next"
+															th:attr="style=${ph.hiddenNext} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=${page.number + 1},size=${page.size})}">&gt;</a></span>
+														<span class="next"
+															th:attr="style=${ph.hiddenLast} ? 'visibility:hidden'"><a
+															class="js-pagenation"
+															th:href="@{/sample/users/show(page=${page.totalPages - 1},size=${page.size})}">&gt;&gt;</a></span>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+	</div>
+	<!-- ./wrapper -->
+
+	<div th:replace="bottom-js"></div>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+
+			var table = $('#searchResult').DataTable({
+				scrollY : "390px",
+				scrollX : true,
+				scrollCollapse : true,
+				paging : false,
+				searching : false,
+			});
+
+			new $.fn.dataTable.FixedColumns(table, {
+				leftColumns : 1
+			});
+
+			$('.js-pagenation').each(function() {
+				$(this).click(function() {
+					$('#deptSearchForm').attr('action', $(this).attr('href'));
+					$(this).attr('href', '#');
+					$('#deptSearchForm').submit();
+				});
+			});
+
+			$('#deptSearchForm').focus();
+
+			$('#doSearch').bind(
+					'click',
+					function() {
+						$('#deptSearchForm').attr("action",
+								/*[[@{/cmp0090/doSearch}]]*/);
+						$('#deptSearchForm').submit();
+					});
+
+			$('#checkDownload').bind('click',
+					function() {
+						$('#deptSearchForm').attr("action",
+	                            /*[[@{/cmp0090/checkDownload}]]*/);
+						$('#deptSearchForm').submit();
+	                    $('#deptSearchForm').prop('disabled', true);
+	                    setTimeout(function(){$('#checkDownload').removeAttr('disabled');},1000);
+					});
+
+			$('#doSend').bind('click',
+					function() {
+						$('#deptSearchForm').attr("action",
+	                            /*[[@{/cmp0090/doSend}]]*/);
+						$('#deptSearchForm').submit();
+	                    $('#deptSearchForm').prop('disabled', true);
+	                    setTimeout(function(){$('#doSend').removeAttr('disabled');},1000);
+					});
+		});
+		/*]]>*/
+	</script>
+</body>
+</html>

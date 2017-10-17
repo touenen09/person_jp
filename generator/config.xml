@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE generatorConfiguration PUBLIC
+   "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="D:/eclipse-workspace/mitsubishi_pj/lib/ojdbc8.jar" />
+	<context id="context1">
+		<jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@141.144.144.127:1521/PDB1.gse00010236.oraclecloud.internal" userId="mit-ai"
+			password="mitai" />
+
+		<javaModelGenerator targetPackage="com.mitsubishi.demo.common.dataset"
+			targetProject="mitsubishi_pj" />
+		<sqlMapGenerator targetPackage="com.mitsubishi.demo.common.mapper"
+			targetProject="mitsubishi_pj" />
+		<javaClientGenerator targetPackage="com.mitsubishi.demo.common.mapper"
+			targetProject="mitsubishi_pj" type="XMLMAPPER" />
+
+		<table tableName="Information_Table" />
+		<table tableName="Person_Job_History_Table" />
+		<table tableName="Person_Career_Data" />
+
+	</context>
+</generatorConfiguration>
