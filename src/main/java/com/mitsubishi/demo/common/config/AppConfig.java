@@ -33,15 +33,28 @@ public class AppConfig {
 	DataSourceProperties dataSourceProperties;
 	DataSource dataSource;
 
-	@Bean(destroyMethod = "close")
+	// @Bean(destroyMethod = "close")
+	@Bean
 	DataSource realDataSource() {
 		DataSourceBuilder factory = DataSourceBuilder.create(this.dataSourceProperties.getClassLoader())
 				.url(this.dataSourceProperties.getUrl()).username(this.dataSourceProperties.getUsername())
 				.password(this.dataSourceProperties.getPassword());
 		this.dataSource = factory.build();
-		return this.dataSource;
-		// return new Log4jdbcProxyDataSource(this.dataSource);
+		// return this.dataSource;
+		return new Log4jdbcProxyDataSource(this.dataSource);
 	}
+
+	// // @Bean(destroyMethod = "close")
+	// @ConfigurationProperties("spring.datasource.druid")
+	// public DataSource dataSource() {
+	// return DruidDataSourceBuilder.create().build();
+	//
+	// }
+	//
+	// @Bean
+	// public DataSource realDataSource() {
+	// return new Log4jdbcProxyDataSource(dataSource());
+	// }
 
 	@Bean
 	public SqlSessionFactory getSqlSessionFactory() {

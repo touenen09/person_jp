@@ -118,54 +118,34 @@ public class PersonCareerController {
 				personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
 						DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
 
+				/**
+				 * select list
+				 */
 				List<ListInfo> seleteProduct = new ArrayList<ListInfo>();
-
 				List<ListInfo> seleteProductDetail = new ArrayList<ListInfo>();
-
 				List<ListInfo> seleteFunction = new ArrayList<ListInfo>();
-
 				List<ListInfo> seleteFunctionDetail = new ArrayList<ListInfo>();
-
 				List<ListInfo> seleteLocation = new ArrayList<ListInfo>();
 
 				if ("1".equals(personJobHistoryTable.getGroup1())) {
 
-					InformationTableExample informationTableExample = new InformationTableExample();
-					com.mitsubishi.demo.common.dataset.InformationTableExample.Criteria informationTableExampleCriteria = informationTableExample
-							.createCriteria();
-
-					informationTableExampleCriteria.andKey1EqualTo("Product1");
-					informationTableExampleCriteria.andKey2EqualTo(personCareerDataExt.getProduct());
-
-					List<InformationTable> informationTableList = informationFacade
-							.selectByExample(informationTableExample);
-
-					for (InformationTable informationTable : informationTableList) {
-						ListInfo info = new ListInfo();
-						info.setCode(informationTable.getKey2());
-						info.setName(informationTable.getValueLong());
-						seleteProduct.add(info);
-					}
-
+					seleteProduct.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
+					seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
+					seleteFunction.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), null));
+					seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(),
+							personCareerDataExt.getFunctionDetail()));
+					seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
 				} else {
 
-					InformationTableExample informationTableExample = new InformationTableExample();
-					com.mitsubishi.demo.common.dataset.InformationTableExample.Criteria informationTableExampleCriteria = informationTableExample
-							.createCriteria();
-
-					informationTableExampleCriteria.andKey1EqualTo("Product2");
-					informationTableExampleCriteria.andKey2EqualTo(personCareerDataExt.getProduct());
-
-					List<InformationTable> informationTableList = informationFacade
-							.selectByExample(informationTableExample);
-
-					for (InformationTable informationTable : informationTableList) {
-						ListInfo info = new ListInfo();
-						info.setCode(informationTable.getKey2());
-						info.setName(informationTable.getValueLong());
-						seleteProduct.add(info);
-					}
+					seleteProduct.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), null));
+					seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(),
+							personCareerDataExt.getProductDetail()));
+					seleteFunction.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), null));
+					seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(),
+							personCareerDataExt.getFunctionDetail()));
 				}
+
+				seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
 
 				personCareerDataExt.setSeleteProduct(seleteProduct);
 				personCareerDataExt.setSeleteProductDetail(seleteProductDetail);
@@ -203,7 +183,57 @@ public class PersonCareerController {
 				personJobHistoryTableExample.setOrderByClause("START_DATE desc"); // 降順
 				List<PersonCareerData> personCareerDataList = personCareerFacade
 						.selectByExample(personCareerDataExample);
-				obj[1] = personCareerDataList;
+
+				//
+				List<PersonCareerDataExt> personCareerDataExtList = new ArrayList<PersonCareerDataExt>();
+				for (PersonCareerData personCareerData : personCareerDataList) {
+					PersonCareerDataExt personCareerDataExt = new PersonCareerDataExt();
+
+					BeanUtils.copyProperties(personCareerData, personCareerDataExt);
+					personCareerDataExt.setStartDateString(DateUtil.convertDateToString(
+							personCareerDataExt.getStartDate(), DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+					personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
+							DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+
+					/**
+					 * select list
+					 */
+					List<ListInfo> seleteProduct = new ArrayList<ListInfo>();
+					List<ListInfo> seleteProductDetail = new ArrayList<ListInfo>();
+					List<ListInfo> seleteFunction = new ArrayList<ListInfo>();
+					List<ListInfo> seleteFunctionDetail = new ArrayList<ListInfo>();
+					List<ListInfo> seleteLocation = new ArrayList<ListInfo>();
+
+					if ("1".equals(personJobHistoryTable.getGroup1())) {
+
+						seleteProduct.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
+						seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
+						seleteFunction.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), null));
+						seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(),
+								personCareerDataExt.getFunctionDetail()));
+						seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+					} else {
+
+						seleteProduct.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), null));
+						seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(),
+								personCareerDataExt.getProductDetail()));
+						seleteFunction.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), null));
+						seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(),
+								personCareerDataExt.getFunctionDetail()));
+					}
+
+					seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+
+					personCareerDataExt.setSeleteProduct(seleteProduct);
+					personCareerDataExt.setSeleteProductDetail(seleteProductDetail);
+					personCareerDataExt.setSeleteFunction(seleteFunction);
+					personCareerDataExt.setSeleteFunctionDetail(seleteFunctionDetail);
+					personCareerDataExt.setSeleteLocation(seleteLocation);
+
+					personCareerDataExtList.add(personCareerDataExt);
+				}
+
+				obj[1] = personCareerDataExtList;
 				personCareerDataSyumuHistoryList.add(obj);
 
 			}
@@ -250,6 +280,41 @@ public class PersonCareerController {
 				personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
 						DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
 
+				/**
+				 * select list
+				 */
+				List<ListInfo> seleteProduct = new ArrayList<ListInfo>();
+				List<ListInfo> seleteProductDetail = new ArrayList<ListInfo>();
+				List<ListInfo> seleteFunction = new ArrayList<ListInfo>();
+				List<ListInfo> seleteFunctionDetail = new ArrayList<ListInfo>();
+				List<ListInfo> seleteLocation = new ArrayList<ListInfo>();
+
+				if ("1".equals(personJobHistoryTableKenmu.getGroup1())) {
+
+					seleteProduct.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
+					seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
+					seleteFunction.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), null));
+					seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(),
+							personCareerDataExt.getFunctionDetail()));
+					seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+				} else {
+
+					seleteProduct.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), null));
+					seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(),
+							personCareerDataExt.getProductDetail()));
+					seleteFunction.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), null));
+					seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(),
+							personCareerDataExt.getFunctionDetail()));
+				}
+
+				seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+
+				personCareerDataExt.setSeleteProduct(seleteProduct);
+				personCareerDataExt.setSeleteProductDetail(seleteProductDetail);
+				personCareerDataExt.setSeleteFunction(seleteFunction);
+				personCareerDataExt.setSeleteFunctionDetail(seleteFunctionDetail);
+				personCareerDataExt.setSeleteLocation(seleteLocation);
+
 				personCareerDataExtKenmuList.add(personCareerDataExt);
 
 			}
@@ -263,6 +328,32 @@ public class PersonCareerController {
 		return "authorization/personcareer/detail";
 	}
 
+	private List<ListInfo> getListInfo(String key1, String key2, String key3) {
+
+		List<ListInfo> listInfo = new ArrayList<ListInfo>();
+
+		InformationTableExample informationTableExample = new InformationTableExample();
+		com.mitsubishi.demo.common.dataset.InformationTableExample.Criteria informationTableExampleCriteria = informationTableExample
+				.createCriteria();
+
+		informationTableExampleCriteria.andKey1EqualTo(key1);
+		informationTableExampleCriteria.andKey2EqualTo(key2);
+		if (key3 != null) {
+			informationTableExampleCriteria.andKey2EqualTo(key3);
+		}
+
+		List<InformationTable> informationTableList = informationFacade.selectByExample(informationTableExample);
+
+		for (InformationTable informationTable : informationTableList) {
+			ListInfo info = new ListInfo();
+			info.setCode(informationTable.getKey2());
+			info.setName(informationTable.getValueLong());
+			listInfo.add(info);
+		}
+
+		return listInfo;
+	}
+
 	@RequestMapping("/doRegist")
 	public String doRegist(PersonCareerForm form, BindingResult result, Model model) {
 
@@ -272,6 +363,9 @@ public class PersonCareerController {
 				System.out.println(personCareerDataExt.getStartDate());
 			}
 		}
+
+		// List<PersonCareerDataExt> list2 = form.getPersonCareerDataSyumuHistoryList();
+		// List<PersonCareerDataExt> list3 = form.getPersonCareerDataKenmuDetailList();
 
 		return "redirect:/authorization/personcareer/goIndex/1";
 	}
