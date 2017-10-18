@@ -2,20 +2,10 @@ package com.mitsubishi.demo.functions.personcareer.facade;
 
 import java.util.List;
 
-import com.mitsubishi.demo.common.dataset.PersonTable;
-import com.mitsubishi.demo.common.dataset.PersonTableExample;
+import com.mitsubishi.demo.common.dataset.PersonCareerData;
+import com.mitsubishi.demo.common.dataset.PersonCareerDataExample;
 
 public interface PersonCareerFacade {
 
-	List<PersonTable> selectByExample();
-
-	List<PersonTable> selectByExample(PersonTableExample example);
-
-	int insertSelective(PersonTable record);
-
-	PersonTable selectByPrimaryKey(String personNum);
-
-	int updateByPrimaryKey(PersonTable record);
-
-	int deleteByPrimaryKey(String personNum);
+	List<PersonCareerData> selectByExample(PersonCareerDataExample example);
 }
