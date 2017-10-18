@@ -63,6 +63,12 @@ div.dataTables_wrapper {
     border: 1px solid;
     border-top: none;
 }
+.career-area .add,.career-area .delete{
+	display:inline-block;
+	padding:5px;
+	border: 1px solid #218807;
+    cursor: pointer;
+}
 -->
 </style>
 
@@ -144,9 +150,14 @@ div.dataTables_wrapper {
 														</tr>
 														
 													</table>
+													
+													<!-- loop1  主務  or 兼務-->
 													<div>
 															<div class="col-md-1" >主務</div>
 															<div class="col-md-11">
+															
+															
+																<!-- loop2  header-->
 																<ul class="job-table clearfix"
 																	style="margin: 0; width: 100%;">
 
@@ -159,129 +170,195 @@ div.dataTables_wrapper {
 																		<li class="wl-15">広げる</li>
 		
 																</ul>
-																<ul class="job-table-data clearfix"
-																	style="margin: 0;width: 100%;">
 																
-																	
-																		<li class="wl-10">2010/4/1</li>
-																		<li class="wl-10">昇格</li>
-																		<li class="wl-10">NNNNNNN</li>
-																		<li class="wl-10">NNNNNNNNNNNNNNNNNNNNN</li>
-																		<li class="wl-10">主任</li>
-																		<li class="wl-10">東京</li>
-																		<li class="wl-15"></li>
-																	
-																</ul>
-																<div class="career-area">
-																		
-																		<table class="table-condensed"
-																			style="border: 0; margin: 0; width: 100%;">
-																			<tr>
-																				<td class="col-md-1">開始年月</td>
-																				<td class="col-md-1">終了年月</td>
-																				<td class="col-md-1">担当商品</td>
-																				<td class="col-md-1">担当商品詳細</td>
-																				<td class="col-md-1">担当機能</td>
-																				<td class="col-md-1">担当機能詳細</td>
-																				<td class="col-md-1">勤務地</td>
-																				<td class="col-md-1">更新日時</td>
-																				<td class="col-md-1">更新ユーザー</td>
-																				<td class="col-md-1"> </td>
-																			</tr>
-																			<tr class="career-data-item">
-																				<td class="col-md-1"><input type="text"
-																class="form-control" id="name" th:field="*{name}"
-																maxlength="20" /></td>
-																				<td class="col-md-1"><input type="text"
-																class="form-control" id="name" th:field="*{name}"
-																maxlength="20" /></td>
-																				<td class="col-md-1"><select>
-																					  <option value="volvo">Volvo</option>
-																					  <option value="saab">Saab</option>
-																					  <option value="mercedes">Mercedes</option>
-																					  <option value="audi">Audi</option>
-																					</select></td>
-																				<td class="col-md-1">
-																					<select>
-																					  <option value="volvo">Volvo</option>
-																					  <option value="saab">Saab</option>
-																					  <option value="mercedes">Mercedes</option>
-																					  <option value="audi">Audi</option>
-																					</select></td>
-																				<td class="col-md-1">
-																					<select>
-																					  <option value="volvo">Volvo</option>
-																					  <option value="saab">Saab</option>
-																					  <option value="mercedes">Mercedes</option>
-																					  <option value="audi">Audi</option>
-																					</select></td>
-																				<td class="col-md-1">
-																					<select>
-																					  <option value="volvo">Volvo</option>
-																					  <option value="saab">Saab</option>
-																					  <option value="mercedes">Mercedes</option>
-																					  <option value="audi">Audi</option>
-																					</select></td>
-																				<td class="col-md-1">
-																					<select>
-																					  <option value="volvo">Volvo</option>
-																					  <option value="saab">Saab</option>
-																					  <option value="mercedes">Mercedes</option>
-																					  <option value="audi">Audi</option>
-																					</select></td>
-																				<td class="col-md-1"><input type="text"
-																class="form-control" id="name" th:field="*{name}"
-																maxlength="20" /></td>
-																				<td class="col-md-1"><input type="text"
-																class="form-control" id="name" th:field="*{name}"
-																maxlength="20" /></td>
-																				<td><span class="add">+</span> <span class="delete">-</span></td></tr>
-																		</table>
-																			
-																</div>
-																<ul class="job-table-data clearfix"
-																	style="margin: 0;width: 100%;">
 																
-																	
-																		<li class="wl-10">2010/4/1</li>
-																		<li class="wl-10">昇格</li>
-																		<li class="wl-10">NNNNNNN</li>
-																		<li class="wl-10">NNNNNNNNNNNNNNNNNNNNN</li>
-																		<li class="wl-10">主任</li>
-																		<li class="wl-10">東京</li>
-																		<li class="wl-15"></li>
-																	
-																</ul>
-																<div class="career-area">
+																
+																
+																<!-- loop2  data-->
+																<div class="first">
+																	<ul class="job-table-data clearfix"
+																		style="margin: 0;width: 100%;">																	
+																			<li class="wl-10">2010/4/1</li>
+																			<li class="wl-10">昇格</li>
+																			<li class="wl-10">NNNNNNN</li>
+																			<li class="wl-10">NNNNNNNNNNNNNNNNNNNNN</li>
+																			<li class="wl-10">主任</li>
+																			<li class="wl-10">東京</li>
+																			<li class="wl-15"></li>
 																		
-																		<table class="table-condensed"
-																			style="border: 0; margin: 0; width: 100%;">
-																			<tr>
-																				<td class="col-md-1">開始年月</td>
-																				<td class="col-md-1">終了年月</td>
-																				<td class="col-md-1">担当商品</td>
-																				<td class="col-md-1">担当商品詳細</td>
-																				<td class="col-md-1">担当機能</td>
-																				<td class="col-md-1">担当機能詳細</td>
-																				<td class="col-md-1">勤務地</td>
-																				<td class="col-md-1">更新日時</td>
-																				<td class="col-md-1">更新ユーザー</td>
-																			</tr>
-																			<tr>
-																				<td class="col-md-1"></td>
-																				<td class="col-md-1"></td>
-																				<td class="col-md-1"></td>
-																				<td class="col-md-1"></td>
-																				<td class="col-md-1"></td>
-																				<td class="col-md-1"></td>
-																				<td class="col-md-1"></td>
-																			</tr>
-
-																		</table>
+																	</ul>
+																	<div class="career-area">
 																			
+																			<table class="table-condensed"
+																				style="border: 0; margin: 0; width: 100%;">
+																				
+																				
+																				<!-- loop3  header-->
+																				<tr>
+																					<td class="col-md-1">開始年月</td>
+																					<td class="col-md-1">終了年月</td>
+																					<td class="col-md-1">担当商品</td>
+																					<td class="col-md-1">担当商品詳細</td>
+																					<td class="col-md-1">担当機能</td>
+																					<td class="col-md-1">担当機能詳細</td>
+																					<td class="col-md-1">勤務地</td>
+																					<td class="col-md-1">更新日時</td>
+																					<td class="col-md-1">更新ユーザー</td>
+																					<td class="col-md-1"> </td>
+																				</tr>
+																				
+																				
+																				<!-- loop3  data-->
+																				<tr class="career-data-item">
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td class="col-md-1"><select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td><a href="javascript:void(0)" class="add">+</a> <span class="delete">-</span></td></tr>
+																					<!-- end loop3 -->
+																					
+																			</table>
+																				
+																	</div>
 																</div>
+																<!-- end loop2 data -->
+																
+																
+																<!-- loop2  data-->
+																<div class="second">
+																	<ul class="job-table-data clearfix"
+																		style="margin: 0;width: 100%;">
+																	
+																		
+																			<li class="wl-10">2010/4/1</li>
+																			<li class="wl-10">昇格</li>
+																			<li class="wl-10">NNNNNNN</li>
+																			<li class="wl-10">NNNNNNNNNNNNNNNNNNNNN</li>
+																			<li class="wl-10">主任</li>
+																			<li class="wl-10">東京</li>
+																			<li class="wl-15"></li>
+																		
+																	</ul>
+																	<div class="career-area">
+																			
+																			<table class="table-condensed"
+																				style="border: 0; margin: 0; width: 100%;">
+																				<tr>
+																					<td class="col-md-1">開始年月</td>
+																					<td class="col-md-1">終了年月</td>
+																					<td class="col-md-1">担当商品</td>
+																					<td class="col-md-1">担当商品詳細</td>
+																					<td class="col-md-1">担当機能</td>
+																					<td class="col-md-1">担当機能詳細</td>
+																					<td class="col-md-1">勤務地</td>
+																					<td class="col-md-1">更新日時</td>
+																					<td class="col-md-1">更新ユーザー</td>
+																					<td class="col-md-1"> </td>
+																				</tr>
+																				<tr class="career-data-item">
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td class="col-md-1"><select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1">
+																						<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="mercedes">Mercedes</option>
+																						  <option value="audi">Audi</option>
+																						</select></td>
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td class="col-md-1"><input type="text"
+																	class="form-control" id="name" th:field="*{name}"
+																	maxlength="20" /></td>
+																					<td><a href="javascript:void(0)" class="add">+</a> <span class="delete">-</span></td></tr>
+																		
+	
+																			</table>
+																				
+																	</div>
+																</div>
+																<!-- end loop2 data -->
+																
+																
 															</div>
 													</div>
+													
+													
+													<!-- end loop1 -->
 												</div>
 											</div>
 										</div>
@@ -324,17 +401,16 @@ div.dataTables_wrapper {
 	/*<![CDATA[*/
 	$(document).ready(
 		function() {
-			var $career_add = $(".add");
-			var $career_delete = $(".delete");
-
-			$career_add.on("click",function(e){
+			var $career_area = $(".career-area");
+			
+			$career_area.on("click","a.add",function(e){
 				var item = $(this).parents('.career-data-item');
 				var newElem=item[0].cloneNode(true);
 				item.after(newElem);
 	//			resetIndex();
 
 			});	
-			$career_delete.on("click",function(e){
+			$career_area.on("click",".delete",function(e){
 				$(this).parents('.career-data-item').remove();
 				
 
