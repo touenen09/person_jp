@@ -16,9 +16,6 @@
 	padding-right: 10px;
 }
 
-html, body {
-	overflow: hidden;
-}
 
 .fieldError {
 	border-color: #dd4b39;
@@ -329,22 +326,18 @@ div.dataTables_wrapper {
 		function() {
 			var $career_add = $(".add");
 			var $career_delete = $(".delete");
-			var $question_container=$('.career-data-item');//内容容器
-			var $questionbody = $question_container.find('tbody');//
 
 			$career_add.on("click",function(e){
 				var item = $(this).parents('.career-data-item');
-		//		debugger
-		//		var i = $question_container.find('tbody tr').length;
-		//		var html_content = $("#question_html" + type).find('tbody').children();//模板元素
-				var newElem=item[0].cloneNode(true);//克隆模板元素添加实例化属性
+				var newElem=item[0].cloneNode(true);
 				item.after(newElem);
 	//			resetIndex();
-//				title_id = title_id + 1;
-//				var tId =  'question_title'+title_id;
-//				$question_container.find('.question_title:last').attr('id',tId);
-//				
-//				UE.getEditor(tId, { initialFrameHeight: 130 ,initialFrameWidth: 700});
+
+			});	
+			$career_delete.on("click",function(e){
+				$(this).parents('.career-data-item').remove();
+				
+
 			});	
 				
 			$('#personTableForm').focus();
