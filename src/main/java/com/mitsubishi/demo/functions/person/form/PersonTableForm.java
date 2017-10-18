@@ -1,11 +1,5 @@
 package com.mitsubishi.demo.functions.person.form;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 public class PersonTableForm {
 
 	private String personNum;
