@@ -26,7 +26,7 @@ public class PersonCareerDataServiceImpl implements PersonCareerDataService {
 	@Override
 	public int deleteByExample(PersonCareerDataExample example) {
 
-		return 0;
+		return personCareerDataMapper.deleteByExample(example);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class PersonCareerDataServiceImpl implements PersonCareerDataService {
 	@Override
 	public int insert(PersonCareerData record) {
 
-		return 0;
+		return personCareerDataMapper.insert(record);
 	}
 
 	@Override

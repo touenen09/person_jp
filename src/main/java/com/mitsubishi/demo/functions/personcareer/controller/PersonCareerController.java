@@ -1,5 +1,6 @@
 package com.mitsubishi.demo.functions.personcareer.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -339,7 +340,7 @@ public class PersonCareerController {
 		informationTableExampleCriteria.andKey1EqualTo(key1);
 		informationTableExampleCriteria.andKey2EqualTo(key2);
 		if (key3 != null) {
-			informationTableExampleCriteria.andKey2EqualTo(key3);
+			informationTableExampleCriteria.andKey3EqualTo(key3);
 		}
 
 		List<InformationTable> informationTableList = informationFacade.selectByExample(informationTableExample);
@@ -355,19 +356,24 @@ public class PersonCareerController {
 	}
 
 	@RequestMapping("/doRegist")
-	public String doRegist(PersonCareerForm form, BindingResult result, Model model) {
+	public String doRegist(PersonCareerForm form, BindingResult result, Model model) throws ParseException {
 
-		List<PersonCareerDataExt> personCareerDataSyumuDetailList = form.getPersonCareerDataSyumuDetailList();
-		if (personCareerDataSyumuDetailList != null && personCareerDataSyumuDetailList.size() > 0) {
-			for (PersonCareerDataExt personCareerDataExt : personCareerDataSyumuDetailList) {
-				System.out.println(personCareerDataExt.getStartDate());
-			}
-		}
+		int count = personCareerFacade.updatePersonCareerData(form);
+
+		// List<PersonCareerDataExt> personCareerDataSyumuDetailList =
+		// form.getPersonCareerDataSyumuDetailList();
+		// if (personCareerDataSyumuDetailList != null &&
+		// personCareerDataSyumuDetailList.size() > 0) {
+		// for (PersonCareerDataExt personCareerDataExt :
+		// personCareerDataSyumuDetailList) {
+		// System.out.println(personCareerDataExt.getStartDate());
+		// }
+		// }
 
 		// List<PersonCareerDataExt> list2 = form.getPersonCareerDataSyumuHistoryList();
 		// List<PersonCareerDataExt> list3 = form.getPersonCareerDataKenmuDetailList();
 
-		return "redirect:/authorization/personcareer/goIndex/1";
+		return "redirect:/authorization/personcareer/goRegist/" + form.getPersonTableForm().getPersonNum();
 	}
 
 	@RequestMapping("/goUpdate/{personNum}")
