@@ -69,6 +69,10 @@ div.dataTables_wrapper {
 	border: 1px solid #218807;
     cursor: pointer;
 }
+.none{
+	display:none;
+	
+}
 -->
 </style>
 
@@ -167,7 +171,7 @@ div.dataTables_wrapper {
 																		<li class="wl-10">所属</li>
 																		<li class="wl-10">役職</li>
 																		<li class="wl-10">勤務地</li>
-																		<li class="wl-15">広げる</li>
+																		<li class="wl-15"><a href="javascript:void(0)" class="expand">広げる</a></li>
 		
 																</ul>
 																
@@ -267,7 +271,7 @@ div.dataTables_wrapper {
 																
 																
 																<!-- loop2  data-->
-																<div class="second">
+																<div class="none">
 																	<ul class="job-table-data clearfix"
 																		style="margin: 0;width: 100%;">
 																	
@@ -402,6 +406,7 @@ div.dataTables_wrapper {
 	$(document).ready(
 		function() {
 			var $career_area = $(".career-area");
+			var $main = $(".job-table");
 			
 			$career_area.on("click","a.add",function(e){
 				var item = $(this).parents('.career-data-item');
@@ -414,8 +419,20 @@ div.dataTables_wrapper {
 				$(this).parents('.career-data-item').remove();
 				
 
-			});	
-				
+			});
+			
+			$main.on("click",".expand",function(e){
+				$(this).parents('.col-md-11').find(".none").removeClass("none").addClass("others");
+				$(this).removeClass("expand").addClass("closeothers").text("閉じる");
+
+			});
+			
+			$main.on("click",".closeothers",function(e){
+				$(this).parents('.col-md-11').find(".others").removeClass("others").addClass("none");
+				$(this).removeClass("closeothers").addClass("expand").text("広げる");
+
+			});
+			
 			$('#personTableForm').focus();
 
 			$('#goIndex').bind(
