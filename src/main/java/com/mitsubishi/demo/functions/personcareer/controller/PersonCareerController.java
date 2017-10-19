@@ -29,6 +29,7 @@ import com.mitsubishi.demo.functions.person.form.PersonTableForm;
 import com.mitsubishi.demo.functions.personcareer.facade.InformationFacade;
 import com.mitsubishi.demo.functions.personcareer.facade.PersonCareerFacade;
 import com.mitsubishi.demo.functions.personcareer.form.PersonCareerDataExt;
+import com.mitsubishi.demo.functions.personcareer.form.PersonCareerDataHistory;
 import com.mitsubishi.demo.functions.personcareer.form.PersonCareerForm;
 import com.mitsubishi.demo.functions.personjobhistory.facade.PersonJobHistoryFacade;
 
@@ -166,13 +167,12 @@ public class PersonCareerController {
 		// 従業員主務歴史情報
 		if (personJobHistoryTableList != null && personJobHistoryTableList.size() > 0) {
 
-			List<Object[]> personCareerDataSyumuHistoryList = new ArrayList<Object[]>();
+			List<PersonCareerDataHistory> personCareerDataSyumuHistoryList = new ArrayList<PersonCareerDataHistory>();
 
 			for (PersonJobHistoryTable personJobHistoryTable : personJobHistoryTableList) {
 				// 従業員主務ヘッダ情報セット
-				Object[] obj = new Object[2];
-				obj[0] = personJobHistoryTable;
-				// form.setPersonCareerDataSyumuHeader(personJobHistoryTable);
+				PersonCareerDataHistory personCareerDataHistory = new PersonCareerDataHistory();
+				personCareerDataHistory.setPersonJobHistoryTable(personJobHistoryTable);
 
 				// 従業員主務詳細情報セット
 				PersonCareerDataExample personCareerDataExample = new PersonCareerDataExample();
@@ -234,8 +234,8 @@ public class PersonCareerController {
 					personCareerDataExtList.add(personCareerDataExt);
 				}
 
-				obj[1] = personCareerDataExtList;
-				personCareerDataSyumuHistoryList.add(obj);
+				personCareerDataHistory.setPersonCareerDataExtHistoryList(personCareerDataExtList);
+				personCareerDataSyumuHistoryList.add(personCareerDataHistory);
 
 			}
 

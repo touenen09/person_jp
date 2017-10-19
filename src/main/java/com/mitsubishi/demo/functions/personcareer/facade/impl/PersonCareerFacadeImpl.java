@@ -15,6 +15,7 @@ import com.mitsubishi.demo.common.service.PersonCareerDataService;
 import com.mitsubishi.demo.common.util.DateUtil;
 import com.mitsubishi.demo.functions.personcareer.facade.PersonCareerFacade;
 import com.mitsubishi.demo.functions.personcareer.form.PersonCareerDataExt;
+import com.mitsubishi.demo.functions.personcareer.form.PersonCareerDataHistory;
 import com.mitsubishi.demo.functions.personcareer.form.PersonCareerForm;
 
 @Service
@@ -47,17 +48,16 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 			List<PersonCareerDataExt> personCareerDataSyumuDetailList = form.getPersonCareerDataSyumuDetailList();
 
 			for (PersonCareerDataExt personCareerDataExt : personCareerDataSyumuDetailList) {
-				personCareerDataExt.setPersonNum(personNum);
 				insertCount += insertPersonCareerData(personCareerDataExt);
 			}
 
 			// 主務歴史ヘッダと詳細リスト,0:ヘッダ,1:詳細
-			List<Object[]> personCareerDataSyumuHistoryList = form.getPersonCareerDataSyumuHistoryList();
+			List<PersonCareerDataHistory> personCareerDataSyumuHistoryList = form.getPersonCareerDataSyumuHistoryList();
 
-			for (Object[] objects : personCareerDataSyumuHistoryList) {
-				List<PersonCareerDataExt> tmpList = (List<PersonCareerDataExt>) objects[1];
-				for (PersonCareerDataExt personCareerDataExt : tmpList) {
-					personCareerDataExt.setPersonNum(personNum);
+			for (PersonCareerDataHistory personCareerDataHistory : personCareerDataSyumuHistoryList) {
+				List<PersonCareerDataExt> personCareerDataExtHistoryList = personCareerDataHistory
+						.getPersonCareerDataExtHistoryList();
+				for (PersonCareerDataExt personCareerDataExt : personCareerDataExtHistoryList) {
 					insertCount += insertPersonCareerData(personCareerDataExt);
 				}
 			}
@@ -66,7 +66,6 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 			List<PersonCareerDataExt> personCareerDataKenmuDetailList = form.getPersonCareerDataKenmuDetailList();
 
 			for (PersonCareerDataExt personCareerDataExt : personCareerDataKenmuDetailList) {
-				personCareerDataExt.setPersonNum(personNum);
 				insertCount += insertPersonCareerData(personCareerDataExt);
 			}
 		} catch (Exception e) {
@@ -87,6 +86,7 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 		BeanUtils.copyProperties(personCareerDataExt, personCareerData);
 
 		// TODO
+		personCareerData.setEffectiveDate(DateUtil.removeTime(personCareerData.getEffectiveDate()));
 		personCareerData.setAddUpdateDatetime(new Date());
 		personCareerData.setUserId("Admin");
 
