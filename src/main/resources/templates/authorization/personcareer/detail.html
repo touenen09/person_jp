@@ -85,6 +85,9 @@ div.dataTables_wrapper {
 .none {
 	display: none;
 }
+.form-control {
+    padding: 6px 2px;
+}
 -->
 </style>
 
@@ -257,12 +260,12 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].effectiveDate'"
 																				th:value="${content.effectiveDate}" />
 																			<td class="col-md-1"><input type="text"
-																				class="form-control"
+																				class="form-control needreset"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].startDateString'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].startDateString'"
 																				th:value="${content.startDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><input type="text"
-																				class="form-control"
+																				class="form-control needreset"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
@@ -384,12 +387,12 @@ div.dataTables_wrapper {
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].effectiveDate'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].effectiveDate'"
 																				th:value="${content.effectiveDate}" /> <input
-																				type="text" class="form-control"
+																				type="text" class="form-control needreset"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].startDateString'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].startDateString'"
 																				th:value="${content.startDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><input type="text"
-																				class="form-control"
+																				class="form-control needreset"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].endDateString'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
@@ -551,12 +554,12 @@ div.dataTables_wrapper {
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].effectiveDate'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].effectiveDate'"
 																				th:value="${content.effectiveDate}" /><input
-																				type="text" class="form-control"
+																				type="text" class="form-control needreset"
 																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].startDateString'"
 																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].startDateString'"
 																				th:value="${content.startDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><input type="text"
-																				class="form-control"
+																				class="form-control needreset"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
@@ -672,16 +675,35 @@ div.dataTables_wrapper {
 			var $career_area = $(".career-area");
 			var $main = $(".job-table");
 
+			function resetIndex($career_area2){
+				var tr=$career_area2.find('.career-data-item');
+				$.each(tr,function(i){
+					var subsets=tr.eq(i).find('input,select');
+					$.each(subsets,function(j){
+						var name = subsets.eq(j).attr('name');
+						var newName = name.replace(/(.*)\[\w+\]/, "$1["+i+"]");
+						//debugger
+						subsets.eq(j).attr('name',newName).attr('id',newName);
+						
+					});
+					
+						
+					
+				});
+			}
+			
 			$career_area.on("click","a.add",function(e){
 				var item = $(this).parents('.career-data-item');
 				var newElem=item[0].cloneNode(true);
+				$(newElem).find(".needreset").val("");
 				item.after(newElem);
-	//			resetIndex();
+				resetIndex($(this).parents(".career-area"));
 
 			});
 			$career_area.on("click",".delete",function(e){
+				var parent = $(this).parents(".career-area");
 				$(this).parents('.career-data-item').remove();
-
+				resetIndex(parent);
 
 			});
 
@@ -709,6 +731,18 @@ div.dataTables_wrapper {
 			$('#doRegist').bind(
 					'click',
 					function() {
+						var startdata = $(".career-area").find(".needreset");
+						var nalert = 0;
+						$.each(startdata,function(j){
+							var value = startdata.eq(j).val();
+							if(value=="" || value==null){
+								nalert = 1;
+							}
+							
+						});
+						if(nalert){
+							alert("開始年月と終了年月は必須項目です");
+						}
 						// if (confirm("登録してよろしいですか？")) {
 							$('#personCareerForm').attr("action",
 								/*[[@{/authorization/personcareer/doRegist}]]*/);
