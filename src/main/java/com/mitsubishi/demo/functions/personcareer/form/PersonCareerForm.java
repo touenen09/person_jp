@@ -16,7 +16,7 @@ public class PersonCareerForm {
 	private List<PersonCareerDataExt> personCareerDataSyumuDetailList;
 
 	// 主務歴史ヘッダと詳細リスト,0:ヘッダ,1:詳細
-	private List<Object[]> personCareerDataSyumuHistoryList;
+	private List<PersonCareerDataHistory> personCareerDataSyumuHistoryList;
 
 	// 兼務ヘッダ
 	private PersonJobHistoryTable personCareerDataKenmuHeader;
@@ -48,11 +48,11 @@ public class PersonCareerForm {
 		this.personCareerDataSyumuDetailList = personCareerDataSyumuDetailList;
 	}
 
-	public List<Object[]> getPersonCareerDataSyumuHistoryList() {
+	public List<PersonCareerDataHistory> getPersonCareerDataSyumuHistoryList() {
 		return personCareerDataSyumuHistoryList;
 	}
 
-	public void setPersonCareerDataSyumuHistoryList(List<Object[]> personCareerDataSyumuHistoryList) {
+	public void setPersonCareerDataSyumuHistoryList(List<PersonCareerDataHistory> personCareerDataSyumuHistoryList) {
 		this.personCareerDataSyumuHistoryList = personCareerDataSyumuHistoryList;
 	}
 
