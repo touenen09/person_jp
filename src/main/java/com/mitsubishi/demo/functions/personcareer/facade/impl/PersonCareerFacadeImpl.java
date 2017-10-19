@@ -77,20 +77,24 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 
 	private int insertPersonCareerData(PersonCareerDataExt personCareerDataExt) throws ParseException {
 
-		personCareerDataExt.setStartDate(DateUtil.convertStringToDate(personCareerDataExt.getStartDateString(),
-				DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
-		personCareerDataExt.setEndDate(DateUtil.convertStringToDate(personCareerDataExt.getEndDateString(),
-				DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+		int i = 0;
 
-		PersonCareerData personCareerData = new PersonCareerData();
-		BeanUtils.copyProperties(personCareerDataExt, personCareerData);
+		if (personCareerDataExt.getStartDateString() != null && personCareerDataExt.getEndDateString() != null) {
+			personCareerDataExt.setStartDate(DateUtil.convertStringToDate(personCareerDataExt.getStartDateString(),
+					DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+			personCareerDataExt.setEndDate(DateUtil.convertStringToDate(personCareerDataExt.getEndDateString(),
+					DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
 
-		// TODO
-		personCareerData.setEffectiveDate(DateUtil.removeTime(personCareerData.getEffectiveDate()));
-		personCareerData.setAddUpdateDatetime(new Date());
-		personCareerData.setUserId("Admin");
+			PersonCareerData personCareerData = new PersonCareerData();
+			BeanUtils.copyProperties(personCareerDataExt, personCareerData);
 
-		int i = personCareerDataService.insert(personCareerData);
+			// TODO
+			personCareerData.setEffectiveDate(DateUtil.removeTime(personCareerData.getEffectiveDate()));
+			personCareerData.setAddUpdateDatetime(new Date());
+			personCareerData.setUserId("Admin");
+
+			i = personCareerDataService.insert(personCareerData);
+		}
 
 		return i;
 	}
