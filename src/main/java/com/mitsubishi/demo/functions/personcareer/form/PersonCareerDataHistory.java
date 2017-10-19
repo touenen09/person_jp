@@ -2,20 +2,18 @@ package com.mitsubishi.demo.functions.personcareer.form;
 
 import java.util.List;
 
-import com.mitsubishi.demo.common.dataset.PersonJobHistoryTable;
-
 public class PersonCareerDataHistory {
 
-	private PersonJobHistoryTable personJobHistoryTable;
+	private PersonJobHistoryTableExt personJobHistoryTableExt;
 
 	private List<PersonCareerDataExt> personCareerDataExtHistoryList;
 
-	public PersonJobHistoryTable getPersonJobHistoryTable() {
-		return personJobHistoryTable;
+	public PersonJobHistoryTableExt getPersonJobHistoryTableExt() {
+		return personJobHistoryTableExt;
 	}
 
-	public void setPersonJobHistoryTable(PersonJobHistoryTable personJobHistoryTable) {
-		this.personJobHistoryTable = personJobHistoryTable;
+	public void setPersonJobHistoryTableExt(PersonJobHistoryTableExt personJobHistoryTableExt) {
+		this.personJobHistoryTableExt = personJobHistoryTableExt;
 	}
 
 	public List<PersonCareerDataExt> getPersonCareerDataExtHistoryList() {

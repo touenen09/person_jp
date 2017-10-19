@@ -31,6 +31,7 @@ import com.mitsubishi.demo.functions.personcareer.facade.PersonCareerFacade;
 import com.mitsubishi.demo.functions.personcareer.form.PersonCareerDataExt;
 import com.mitsubishi.demo.functions.personcareer.form.PersonCareerDataHistory;
 import com.mitsubishi.demo.functions.personcareer.form.PersonCareerForm;
+import com.mitsubishi.demo.functions.personcareer.form.PersonJobHistoryTableExt;
 import com.mitsubishi.demo.functions.personjobhistory.facade.PersonJobHistoryFacade;
 
 @Controller
@@ -97,7 +98,18 @@ public class PersonCareerController {
 
 			// 従業員主務ヘッダ情報セット
 			PersonJobHistoryTable personJobHistoryTable = personJobHistoryTableList.get(0);
-			form.setPersonCareerDataSyumuHeader(personJobHistoryTable);
+
+			// 異動区分と異動理由の名称を設定
+			PersonJobHistoryTableExt personJobHistoryTableExt = new PersonJobHistoryTableExt();
+			BeanUtils.copyProperties(personJobHistoryTable, personJobHistoryTableExt);
+			personJobHistoryTableExt
+					.setActionName(getInformationTableValue("Action", personJobHistoryTableExt.getAction(), "@NULL"));
+			personJobHistoryTableExt.setActionReasonName(getInformationTableValue("Action",
+					personJobHistoryTableExt.getAction(), personJobHistoryTableExt.getActionReason()));
+			personJobHistoryTableExt.setLocationName(
+					getInformationTableValue("Location", personJobHistoryTableExt.getLocation(), "@NULL"));
+
+			form.setPersonCareerDataSyumuHeader(personJobHistoryTableExt);
 
 			// 従業員主務詳細情報セット
 			PersonCareerDataExample personCareerDataExample = new PersonCareerDataExample();
@@ -116,9 +128,9 @@ public class PersonCareerController {
 
 				BeanUtils.copyProperties(personCareerData, personCareerDataExt);
 				personCareerDataExt.setStartDateString(DateUtil.convertDateToString(personCareerDataExt.getStartDate(),
-						DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
-				personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
-						DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+						DateUtil.DATE_PATTERN_DATE_MOL));
+				personCareerDataExt.setEndDateString(
+						DateUtil.convertDateToString(personCareerDataExt.getEndDate(), DateUtil.DATE_PATTERN_DATE_MOL));
 
 				/**
 				 * select list
@@ -131,23 +143,19 @@ public class PersonCareerController {
 
 				if ("1".equals(personJobHistoryTable.getGroup1())) {
 
-					seleteProduct.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
-					seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
-					seleteFunction.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), null));
-					seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(),
-							personCareerDataExt.getFunctionDetail()));
-					seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
 				} else {
 
-					seleteProduct.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), null));
-					seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(),
-							personCareerDataExt.getProductDetail()));
-					seleteFunction.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), null));
-					seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(),
-							personCareerDataExt.getFunctionDetail()));
+					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
 				}
 
-				seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+				seleteLocation.addAll(getListInfo("Location", "NULL", "@NULL"));
 
 				personCareerDataExt.setSeleteProduct(seleteProduct);
 				personCareerDataExt.setSeleteProductDetail(seleteProductDetail);
@@ -172,7 +180,20 @@ public class PersonCareerController {
 			for (PersonJobHistoryTable personJobHistoryTable : personJobHistoryTableList) {
 				// 従業員主務ヘッダ情報セット
 				PersonCareerDataHistory personCareerDataHistory = new PersonCareerDataHistory();
-				personCareerDataHistory.setPersonJobHistoryTable(personJobHistoryTable);
+
+				// 異動区分と異動理由の名称を設定
+				PersonJobHistoryTableExt personJobHistoryTableExt = new PersonJobHistoryTableExt();
+				BeanUtils.copyProperties(personJobHistoryTable, personJobHistoryTableExt);
+				personJobHistoryTableExt.setActionName(
+						getInformationTableValue("Action", personJobHistoryTableExt.getAction(), "@NULL"));
+				personJobHistoryTableExt.setActionReasonName(getInformationTableValue("Action",
+						personJobHistoryTableExt.getAction(), personJobHistoryTableExt.getActionReason()));
+				personJobHistoryTableExt.setLocationName(
+						getInformationTableValue("Location", personJobHistoryTableExt.getLocation(), "@NULL"));
+
+				form.setPersonCareerDataSyumuHeader(personJobHistoryTableExt);
+
+				personCareerDataHistory.setPersonJobHistoryTableExt(personJobHistoryTableExt);
 
 				// 従業員主務詳細情報セット
 				PersonCareerDataExample personCareerDataExample = new PersonCareerDataExample();
@@ -191,10 +212,10 @@ public class PersonCareerController {
 					PersonCareerDataExt personCareerDataExt = new PersonCareerDataExt();
 
 					BeanUtils.copyProperties(personCareerData, personCareerDataExt);
-					personCareerDataExt.setStartDateString(DateUtil.convertDateToString(
-							personCareerDataExt.getStartDate(), DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+					personCareerDataExt.setStartDateString(DateUtil
+							.convertDateToString(personCareerDataExt.getStartDate(), DateUtil.DATE_PATTERN_DATE_MOL));
 					personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
-							DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+							DateUtil.DATE_PATTERN_DATE_MOL));
 
 					/**
 					 * select list
@@ -207,23 +228,21 @@ public class PersonCareerController {
 
 					if ("1".equals(personJobHistoryTable.getGroup1())) {
 
-						seleteProduct.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
-						seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
-						seleteFunction.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), null));
-						seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(),
-								personCareerDataExt.getFunctionDetail()));
-						seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+						seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
+						seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
+						seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+						seleteFunctionDetail
+								.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
 					} else {
 
-						seleteProduct.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), null));
-						seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(),
-								personCareerDataExt.getProductDetail()));
-						seleteFunction.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), null));
-						seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(),
-								personCareerDataExt.getFunctionDetail()));
+						seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
+						seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
+						seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+						seleteFunctionDetail
+								.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
 					}
 
-					seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+					seleteLocation.addAll(getListInfo("Location", "NULL", "@NULL"));
 
 					personCareerDataExt.setSeleteProduct(seleteProduct);
 					personCareerDataExt.setSeleteProductDetail(seleteProductDetail);
@@ -238,6 +257,16 @@ public class PersonCareerController {
 				personCareerDataSyumuHistoryList.add(personCareerDataHistory);
 
 			}
+
+			form.setPersonCareerDataSyumuHistoryList(personCareerDataSyumuHistoryList);
+		} else {
+			List<PersonCareerDataHistory> personCareerDataSyumuHistoryList = new ArrayList<PersonCareerDataHistory>();
+			PersonCareerDataHistory personCareerDataHistory = new PersonCareerDataHistory();
+			List<PersonCareerDataExt> personCareerDataExtList = new ArrayList<PersonCareerDataExt>();
+			PersonJobHistoryTableExt personJobHistoryTableExt = new PersonJobHistoryTableExt();
+			personCareerDataHistory.setPersonJobHistoryTableExt(personJobHistoryTableExt);
+			personCareerDataHistory.setPersonCareerDataExtHistoryList(personCareerDataExtList);
+			personCareerDataSyumuHistoryList.add(personCareerDataHistory);
 
 			form.setPersonCareerDataSyumuHistoryList(personCareerDataSyumuHistoryList);
 		}
@@ -257,7 +286,18 @@ public class PersonCareerController {
 
 			// 従業員兼務ヘッダ情報セット
 			PersonJobHistoryTable personJobHistoryTableKenmu = personJobHistoryTableKenmuList.get(0);
-			form.setPersonCareerDataKenmuHeader(personJobHistoryTableKenmu);
+
+			// 異動区分と異動理由の名称を設定
+			PersonJobHistoryTableExt personJobHistoryTableKenmuExt = new PersonJobHistoryTableExt();
+			BeanUtils.copyProperties(personJobHistoryTableKenmu, personJobHistoryTableKenmuExt);
+			personJobHistoryTableKenmuExt.setActionName(
+					getInformationTableValue("Action", personJobHistoryTableKenmuExt.getAction(), "@NULL"));
+			personJobHistoryTableKenmuExt.setActionReasonName(getInformationTableValue("Action",
+					personJobHistoryTableKenmuExt.getAction(), personJobHistoryTableKenmuExt.getActionReason()));
+			personJobHistoryTableKenmuExt.setLocationName(
+					getInformationTableValue("Location", personJobHistoryTableKenmuExt.getLocation(), "@NULL"));
+
+			form.setPersonCareerDataKenmuHeader(personJobHistoryTableKenmuExt);
 
 			// 従業員兼務詳細情報セット
 			PersonCareerDataExample personCareerDataExampleKenmu = new PersonCareerDataExample();
@@ -277,9 +317,9 @@ public class PersonCareerController {
 
 				BeanUtils.copyProperties(personCareerData, personCareerDataExt);
 				personCareerDataExt.setStartDateString(DateUtil.convertDateToString(personCareerDataExt.getStartDate(),
-						DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
-				personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
-						DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+						DateUtil.DATE_PATTERN_DATE_MOL));
+				personCareerDataExt.setEndDateString(
+						DateUtil.convertDateToString(personCareerDataExt.getEndDate(), DateUtil.DATE_PATTERN_DATE_MOL));
 
 				/**
 				 * select list
@@ -292,23 +332,19 @@ public class PersonCareerController {
 
 				if ("1".equals(personJobHistoryTableKenmu.getGroup1())) {
 
-					seleteProduct.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
-					seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), null));
-					seleteFunction.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), null));
-					seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(),
-							personCareerDataExt.getFunctionDetail()));
-					seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
 				} else {
 
-					seleteProduct.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), null));
-					seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(),
-							personCareerDataExt.getProductDetail()));
-					seleteFunction.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), null));
-					seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(),
-							personCareerDataExt.getFunctionDetail()));
+					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
 				}
 
-				seleteLocation.addAll(getListInfo("Location", personCareerDataExt.getLocation(), null));
+				seleteLocation.addAll(getListInfo("Location", "NULL", "@NULL"));
 
 				personCareerDataExt.setSeleteProduct(seleteProduct);
 				personCareerDataExt.setSeleteProductDetail(seleteProductDetail);
@@ -324,6 +360,11 @@ public class PersonCareerController {
 
 			// 最新の主務を外す
 			personJobHistoryTableKenmuList.remove(0);
+		} else {
+			List<PersonCareerDataExt> personCareerDataExtKenmuList = new ArrayList<PersonCareerDataExt>();
+			PersonCareerDataExt personCareerDataExt = new PersonCareerDataExt();
+			personCareerDataExtKenmuList.add(personCareerDataExt);
+			form.setPersonCareerDataKenmuDetailList(personCareerDataExtKenmuList);
 		}
 
 		return "authorization/personcareer/detail";
@@ -338,21 +379,60 @@ public class PersonCareerController {
 				.createCriteria();
 
 		informationTableExampleCriteria.andKey1EqualTo(key1);
-		informationTableExampleCriteria.andKey2EqualTo(key2);
-		if (key3 != null) {
-			informationTableExampleCriteria.andKey3EqualTo(key3);
+
+		if ("NULL".equals(key2)) {
+			if ("@NULL".equals(key3)) {
+				informationTableExampleCriteria.andKey3EqualTo(key3);
+			}
+		} else {
+			informationTableExampleCriteria.andKey2EqualTo(key2);
+
+			if ("NOTNULL".equals(key3)) {
+				informationTableExampleCriteria.andKey3IsNotNull();
+				informationTableExampleCriteria.andKey3NotEqualTo("@NULL");
+			}
 		}
 
 		List<InformationTable> informationTableList = informationFacade.selectByExample(informationTableExample);
 
 		for (InformationTable informationTable : informationTableList) {
 			ListInfo info = new ListInfo();
-			info.setCode(informationTable.getKey2());
+			if ("NULL".equals(key2)) {
+				info.setCode(informationTable.getKey2());
+			} else {
+				info.setCode(informationTable.getKey3());
+			}
 			info.setName(informationTable.getValueLong());
 			listInfo.add(info);
 		}
 
 		return listInfo;
+	}
+
+	private String getInformationTableValue(String key1, String key2, String key3) {
+
+		String value = null;
+		List<InformationTable> informationTableList = getInformationTableList(key1, key2, key3);
+		if (informationTableList != null && informationTableList.size() > 0) {
+			value = informationTableList.get(0).getValueLong();
+		}
+
+		return value;
+	}
+
+	private List<InformationTable> getInformationTableList(String key1, String key2, String key3) {
+
+		InformationTableExample informationTableExample = new InformationTableExample();
+		com.mitsubishi.demo.common.dataset.InformationTableExample.Criteria informationTableExampleCriteria = informationTableExample
+				.createCriteria();
+
+		informationTableExampleCriteria.andKey1EqualTo(key1);
+		informationTableExampleCriteria.andKey2EqualTo(key2);
+		informationTableExampleCriteria.andKey3EqualTo(key3);
+
+		List<InformationTable> informationTableList = informationFacade.selectByExample(informationTableExample);
+
+		return informationTableList;
 	}
 
 	@RequestMapping("/doRegist")

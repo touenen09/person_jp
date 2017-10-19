@@ -92,7 +92,6 @@ div.dataTables_wrapper {
 														class="table table-condensed table-striped table-hover">
 														<thead>
 															<tr>
-																<th>No.</th>
 																<th>従業員番号</th>
 																<th>顔写真</th>
 																<th>氏名</th>
@@ -101,16 +100,13 @@ div.dataTables_wrapper {
 																<th>キャリアバンド</th>
 																<th>職責</th>
 																<th>勤務地</th>
+																<th>詳細</th>
 															</tr>
 														</thead>
 														<tbody>
 															<tr th:each="content, iterStat : ${page}">
-																<td th:id="${iterStat.index}"
-																	th:name="${iterStat.index}"
-																	th:value="${iterStat.index}"
-																	th:text="${iterStat.index} + 1"></td>
 																<td><a
-																	th:href="@{/authorization/person/goUpdate/}+${content.personNum}"><span
+																	th:href="@{/authorization/personcareer/goRegist/}+${content.personNum}"><span
 																		th:id="'page['+${iterStat.index}+'].personNum'"
 																		th:name="'page['+${iterStat.index}+'].personNum'"
 																		th:value="${content.personNum}"
@@ -139,6 +135,8 @@ div.dataTables_wrapper {
 																	th:name="'page['+${iterStat.index}+'].location'"
 																	th:value="${content.location}"
 																	th:text="${content.location}"></td>
+																<td><a
+																	th:href="@{/authorization/person/goUpdate/}+${content.personNum}">詳細</a></td>
 															</tr>
 														</tbody>
 													</table>

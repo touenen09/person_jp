@@ -42,6 +42,9 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 
 			// 削除処理
 			PersonCareerDataExample personCareerDataExample = new PersonCareerDataExample();
+			com.mitsubishi.demo.common.dataset.PersonCareerDataExample.Criteria personCareerDataExampleCriteria = personCareerDataExample
+					.createCriteria();
+			personCareerDataExampleCriteria.andPersonNumEqualTo(personNum);
 			personCareerDataService.deleteByExample(personCareerDataExample);
 
 			// 主務詳細リスト
@@ -54,20 +57,25 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 			// 主務歴史ヘッダと詳細リスト,0:ヘッダ,1:詳細
 			List<PersonCareerDataHistory> personCareerDataSyumuHistoryList = form.getPersonCareerDataSyumuHistoryList();
 
-			for (PersonCareerDataHistory personCareerDataHistory : personCareerDataSyumuHistoryList) {
-				List<PersonCareerDataExt> personCareerDataExtHistoryList = personCareerDataHistory
-						.getPersonCareerDataExtHistoryList();
-				for (PersonCareerDataExt personCareerDataExt : personCareerDataExtHistoryList) {
-					insertCount += insertPersonCareerData(personCareerDataExt);
+			if (personCareerDataSyumuHistoryList != null) {
+				for (PersonCareerDataHistory personCareerDataHistory : personCareerDataSyumuHistoryList) {
+					List<PersonCareerDataExt> personCareerDataExtHistoryList = personCareerDataHistory
+							.getPersonCareerDataExtHistoryList();
+					for (PersonCareerDataExt personCareerDataExt : personCareerDataExtHistoryList) {
+						insertCount += insertPersonCareerData(personCareerDataExt);
+					}
 				}
 			}
 
 			// 兼務詳細リスト
 			List<PersonCareerDataExt> personCareerDataKenmuDetailList = form.getPersonCareerDataKenmuDetailList();
 
-			for (PersonCareerDataExt personCareerDataExt : personCareerDataKenmuDetailList) {
-				insertCount += insertPersonCareerData(personCareerDataExt);
+			if (personCareerDataKenmuDetailList != null) {
+				for (PersonCareerDataExt personCareerDataExt : personCareerDataKenmuDetailList) {
+					insertCount += insertPersonCareerData(personCareerDataExt);
+				}
 			}
+
 		} catch (Exception e) {
 			throw e;
 		}
@@ -81,9 +89,9 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 
 		if (personCareerDataExt.getStartDateString() != null && personCareerDataExt.getEndDateString() != null) {
 			personCareerDataExt.setStartDate(DateUtil.convertStringToDate(personCareerDataExt.getStartDateString(),
-					DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+					DateUtil.DATE_PATTERN_DATE_MOL));
 			personCareerDataExt.setEndDate(DateUtil.convertStringToDate(personCareerDataExt.getEndDateString(),
-					DateUtil.DATE_PATTERN_YEAR_MONTH_MOL));
+					DateUtil.DATE_PATTERN_DATE_MOL));
 
 			PersonCareerData personCareerData = new PersonCareerData();
 			BeanUtils.copyProperties(personCareerDataExt, personCareerData);

@@ -204,17 +204,17 @@ div.dataTables_wrapper {
 																	style="margin: 0; width: 100%;">
 
 																	<li class="wl-10"
-																		th:text="*{personCareerDataSyumuHeader.effectiveDate}!=null?*{#dates.format(personCareerDataSyumuHeader.effectiveDate,'dd/MM/yyyy')}:''"></li>
+																		th:text="*{personCareerDataSyumuHeader.effectiveDate}!=null?*{#dates.format(personCareerDataSyumuHeader.effectiveDate,'yyyy/MM/dd')}:''"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataSyumuHeader.action}"></li>
+																		th:text="*{personCareerDataSyumuHeader.actionName}"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataSyumuHeader.actionReason}"></li>
+																		th:text="*{personCareerDataSyumuHeader.actionReasonName}"></li>
 																	<li class="wl-10"
 																		th:text="*{personCareerDataSyumuHeader.department}"></li>
 																	<li class="wl-10"
 																		th:text="*{personCareerDataSyumuHeader.job}"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataSyumuHeader.location}"></li>
+																		th:text="*{personCareerDataSyumuHeader.locationName}"></li>
 
 
 																	<li class="wl-15"></li>
@@ -236,7 +236,7 @@ div.dataTables_wrapper {
 																			<td class="col-md-1">担当機能詳細</td>
 																			<td class="col-md-1">勤務地</td>
 																			<td class="col-md-1">更新日時</td>
-																			<td class="col-md-1">更新ユーザー</td>
+																			<td class="col-md-1">更新ユーザーaa</td>
 																			<td class="col-md-1"></td>
 																		</tr>
 
@@ -272,7 +272,8 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
 																					<option th:each="conf : ${content.seleteProduct}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -281,7 +282,8 @@ div.dataTables_wrapper {
 																				th:value="${content.productDetail}">
 																					<option
 																						th:each="conf : ${content.seleteProductDetail}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -289,7 +291,8 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].function'"
 																				th:value="${content.function}">
 																					<option th:each="conf : ${content.seleteFunction}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.function}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -298,7 +301,8 @@ div.dataTables_wrapper {
 																				th:value="${content.functionDetail}">
 																					<option
 																						th:each="conf : ${content.seleteFunctionDetail}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.functionDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -306,13 +310,14 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].location'"
 																				th:value="${content.location}">
 																					<option th:each="conf : ${content.seleteLocation}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.location}"></option>
 																			</select></td>
 																			<td class="col-md-1"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].addUpdateDatetime'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].addUpdateDatetime'"
 																				th:value="${content.addUpdateDatetime}"
-																				th:text="${content.addUpdateDatetime}"></td>
+																				th:text="${content.addUpdateDatetime}!=null?${#dates.format(content.addUpdateDatetime,'yyyy/MM/dd HH:mm:ss')}:''"></td>
 																			<td class="col-md-1"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].userId'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].userId'"
@@ -338,17 +343,17 @@ div.dataTables_wrapper {
 																	style="margin: 0; width: 100%;">
 
 																	<li class="wl-10"
-																		th:text="${contentAll.personJobHistoryTable.effectiveDate}!=null?${#dates.format(contentAll.personJobHistoryTable.effectiveDate,'dd/MM/yyyy')}:''"></li>
+																		th:text="${contentAll.personJobHistoryTableExt.effectiveDate}!=null?${#dates.format(contentAll.personJobHistoryTableExt.effectiveDate,'yyyy/MM/dd')}:''"></li>
 																	<li class="wl-10"
-																		th:text="${contentAll.personJobHistoryTable.action}"></li>
+																		th:text="${contentAll.personJobHistoryTableExt.actionName}"></li>
 																	<li class="wl-10"
-																		th:text="${contentAll.personJobHistoryTable.actionReason}"></li>
+																		th:text="${contentAll.personJobHistoryTableExt.actionReasonName}"></li>
 																	<li class="wl-10"
-																		th:text="${contentAll.personJobHistoryTable.department}"></li>
+																		th:text="${contentAll.personJobHistoryTableExt.department}"></li>
 																	<li class="wl-10"
-																		th:text="${contentAll.personJobHistoryTable.job}"></li>
+																		th:text="${contentAll.personJobHistoryTableExt.job}"></li>
 																	<li class="wl-10"
-																		th:text="${contentAll.personJobHistoryTable.location}"></li>
+																		th:text="${contentAll.personJobHistoryTableExt.locationName}"></li>
 
 																	<li class="wl-15"></li>
 
@@ -399,7 +404,8 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
 																					<option th:each="conf : ${content.seleteProduct}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -408,7 +414,8 @@ div.dataTables_wrapper {
 																				th:value="${content.productDetail}">
 																					<option
 																						th:each="conf : ${content.seleteProductDetail}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -416,7 +423,8 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].function'"
 																				th:value="${content.function}">
 																					<option th:each="conf : ${content.seleteFunction}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.function}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -425,7 +433,8 @@ div.dataTables_wrapper {
 																				th:value="${content.functionDetail}">
 																					<option
 																						th:each="conf : ${content.seleteFunctionDetail}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.functionDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -433,13 +442,14 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].location'"
 																				th:value="${content.location}">
 																					<option th:each="conf : ${content.seleteLocation}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.location}"></option>
 																			</select></td>
 																			<td class="col-md-1"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].addUpdateDatetime'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].addUpdateDatetime'"
 																				th:value="${content.addUpdateDatetime}"
-																				th:text="${content.addUpdateDatetime}"></td>
+																				th:text="${content.addUpdateDatetime}!=null?${#dates.format(content.addUpdateDatetime,'yyyy/MM/dd HH:mm:ss')}:''"></td>
 																			<td class="col-md-1"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].userId'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].userId'"
@@ -499,17 +509,17 @@ div.dataTables_wrapper {
 																	style="margin: 0; width: 100%;">
 
 																	<li class="wl-10"
-																		th:text="*{personCareerDataKenmuHeader.effectiveDate}!=null?*{#dates.format(personCareerDataKenmuHeader.effectiveDate,'dd/MM/yyyy')}:''"></li>
+																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.effectiveDate}!=null?*{#dates.format(personCareerDataKenmuHeader.effectiveDate,'yyyy/MM/dd')}:''):''"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataKenmuHeader.action}"></li>
+																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.actionName}):''"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataKenmuHeader.actionReason}"></li>
+																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.actionReasonName}):''"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataKenmuHeader.department}"></li>
+																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.department}):''"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataKenmuHeader.job}"></li>
+																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.job}):''"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataKenmuHeader.location}"></li>
+																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.locationName}):''"></li>
 
 
 																	<li class="wl-15"></li>
@@ -552,8 +562,8 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].effectiveDate'"
 																				th:value="${content.effectiveDate}" /><input
 																				type="text" class="form-control"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].startDateString'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].startDateString'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].startDateString'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].startDateString'"
 																				th:value="${content.startDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><input type="text"
 																				class="form-control"
@@ -566,7 +576,8 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
 																					<option th:each="conf : ${content.seleteProduct}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -575,7 +586,8 @@ div.dataTables_wrapper {
 																				th:value="${content.productDetail}">
 																					<option
 																						th:each="conf : ${content.seleteProductDetail}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -583,7 +595,8 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].function'"
 																				th:value="${content.function}">
 																					<option th:each="conf : ${content.seleteFunction}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.function}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -592,7 +605,8 @@ div.dataTables_wrapper {
 																				th:value="${content.functionDetail}">
 																					<option
 																						th:each="conf : ${content.seleteFunctionDetail}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.functionDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
@@ -600,13 +614,14 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].location'"
 																				th:value="${content.location}">
 																					<option th:each="conf : ${content.seleteLocation}"
-																						th:value="${conf.code}" th:text="${conf.name}"></option>
+																						th:value="${conf.code}" th:text="${conf.name}"
+																						th:selected="${conf.code} == ${content.location}"></option>
 																			</select></td>
 																			<td class="col-md-1"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].addUpdateDatetime'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].addUpdateDatetime'"
 																				th:value="${content.addUpdateDatetime}"
-																				th:text="${content.addUpdateDatetime}"></td>
+																				th:text="${content.addUpdateDatetime}!=null?${#dates.format(content.addUpdateDatetime,'yyyy/MM/dd HH:mm:ss')}:''"></td>
 																			<td class="col-md-1"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].userId'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].userId'"

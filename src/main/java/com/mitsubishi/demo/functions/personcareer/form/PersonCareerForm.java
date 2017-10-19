@@ -2,7 +2,6 @@ package com.mitsubishi.demo.functions.personcareer.form;
 
 import java.util.List;
 
-import com.mitsubishi.demo.common.dataset.PersonJobHistoryTable;
 import com.mitsubishi.demo.functions.person.form.PersonTableForm;
 
 public class PersonCareerForm {
@@ -10,7 +9,7 @@ public class PersonCareerForm {
 	private PersonTableForm personTableForm;
 
 	// 主務ヘッダ
-	private PersonJobHistoryTable personCareerDataSyumuHeader;
+	private PersonJobHistoryTableExt personCareerDataSyumuHeader;
 
 	// 主務詳細リスト
 	private List<PersonCareerDataExt> personCareerDataSyumuDetailList;
@@ -19,7 +18,7 @@ public class PersonCareerForm {
 	private List<PersonCareerDataHistory> personCareerDataSyumuHistoryList;
 
 	// 兼務ヘッダ
-	private PersonJobHistoryTable personCareerDataKenmuHeader;
+	private PersonJobHistoryTableExt personCareerDataKenmuHeader;
 
 	// 兼務詳細リスト
 	private List<PersonCareerDataExt> personCareerDataKenmuDetailList;
@@ -32,12 +31,20 @@ public class PersonCareerForm {
 		this.personTableForm = personTableForm;
 	}
 
-	public PersonJobHistoryTable getPersonCareerDataSyumuHeader() {
+	public PersonJobHistoryTableExt getPersonCareerDataSyumuHeader() {
 		return personCareerDataSyumuHeader;
 	}
 
-	public void setPersonCareerDataSyumuHeader(PersonJobHistoryTable personCareerDataSyumuHeader) {
+	public void setPersonCareerDataSyumuHeader(PersonJobHistoryTableExt personCareerDataSyumuHeader) {
 		this.personCareerDataSyumuHeader = personCareerDataSyumuHeader;
+	}
+
+	public PersonJobHistoryTableExt getPersonCareerDataKenmuHeader() {
+		return personCareerDataKenmuHeader;
+	}
+
+	public void setPersonCareerDataKenmuHeader(PersonJobHistoryTableExt personCareerDataKenmuHeader) {
+		this.personCareerDataKenmuHeader = personCareerDataKenmuHeader;
 	}
 
 	public List<PersonCareerDataExt> getPersonCareerDataSyumuDetailList() {
@@ -54,14 +61,6 @@ public class PersonCareerForm {
 
 	public void setPersonCareerDataSyumuHistoryList(List<PersonCareerDataHistory> personCareerDataSyumuHistoryList) {
 		this.personCareerDataSyumuHistoryList = personCareerDataSyumuHistoryList;
-	}
-
-	public PersonJobHistoryTable getPersonCareerDataKenmuHeader() {
-		return personCareerDataKenmuHeader;
-	}
-
-	public void setPersonCareerDataKenmuHeader(PersonJobHistoryTable personCareerDataKenmuHeader) {
-		this.personCareerDataKenmuHeader = personCareerDataKenmuHeader;
 	}
 
 	public List<PersonCareerDataExt> getPersonCareerDataKenmuDetailList() {
