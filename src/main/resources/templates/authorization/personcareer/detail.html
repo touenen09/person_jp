@@ -557,21 +557,21 @@ div.dataTables_wrapper {
 																				th:value="${content.startDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><input type="text"
 																				class="form-control"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].endDateString'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].endDateString'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].endDateString'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].product'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].product'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].product'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
 																					<option th:each="conf : ${content.seleteProduct}"
 																						th:value="${conf.code}" th:text="${conf.name}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].productDetail'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].productDetail'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].productDetail'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].productDetail'"
 																				th:value="${content.productDetail}">
 																					<option
 																						th:each="conf : ${content.seleteProductDetail}"
@@ -579,16 +579,16 @@ div.dataTables_wrapper {
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].function'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].function'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].function'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].function'"
 																				th:value="${content.function}">
 																					<option th:each="conf : ${content.seleteFunction}"
 																						th:value="${conf.code}" th:text="${conf.name}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].functionDetail'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].functionDetail'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].functionDetail'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].functionDetail'"
 																				th:value="${content.functionDetail}">
 																					<option
 																						th:each="conf : ${content.seleteFunctionDetail}"
@@ -596,20 +596,20 @@ div.dataTables_wrapper {
 																			</select></td>
 																			<td class="col-md-1"><select
 																				class="form-control"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].location'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].location'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].location'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].location'"
 																				th:value="${content.location}">
 																					<option th:each="conf : ${content.seleteLocation}"
 																						th:value="${conf.code}" th:text="${conf.name}"></option>
 																			</select></td>
 																			<td class="col-md-1"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].addUpdateDatetime'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].addUpdateDatetime'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].addUpdateDatetime'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].addUpdateDatetime'"
 																				th:value="${content.addUpdateDatetime}"
 																				th:text="${content.addUpdateDatetime}"></td>
 																			<td class="col-md-1"
-																				th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].userId'"
-																				th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].userId'"
+																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].userId'"
+																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].userId'"
 																				th:value="${content.userId}"
 																				th:text="${content.userId}"></td>
 																			<td><a href="javascript:void(0)" class="add">+</a>
