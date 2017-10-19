@@ -43,10 +43,12 @@ div.dataTables_wrapper {
 	border:1px solid #666;
 }
 .job-table li ,.job-table-data li{
-	
-	float:left;
-	width: 13%;
-	padding: 0.5%;
+	float: left;
+    width: 13%;
+    padding: 5px 0.5%;
+    height: 32px;
+    overflow: hidden;
+    line-height: 25px;
 }
 .job-table li.wl-10 ,.job-table-data li.wl-10{
 	border-right:1px solid #666;
@@ -281,18 +283,19 @@ div.dataTables_wrapper {
 																
 																
 																<!-- loop2  data-->
-																<div class="none">
+																<div 
+											th:each="contentAll, iterStatAll : *{personCareerDataSyumuHistoryList}" class="none">
 																	<ul class="job-table-data clearfix"
 																		style="margin: 0;width: 100%;">
 																	
+																		<li class="wl-10"  th:text="${contentAll[0].effectiveDate}"></li>
+																		<li class="wl-10" th:text="${contentAll[0].action}"></li>
+																		<li class="wl-10" th:text="${contentAll[0].actionReason}"></li>
+																		<li class="wl-10" th:text="${contentAll[0].department}"></li>
+																		<li class="wl-10" th:text="${contentAll[0].job}"></li>
+																		<li class="wl-10" th:text="${contentAll[0].location}"></li>
 																		
-																			<li class="wl-10">2010/4/1</li>
-																			<li class="wl-10">昇格</li>
-																			<li class="wl-10">NNNNNNN</li>
-																			<li class="wl-10">NNNNNNNNNNNNNNNNNNNNN</li>
-																			<li class="wl-10">主任</li>
-																			<li class="wl-10">東京</li>
-																			<li class="wl-15"></li>
+																		<li class="wl-15"></li>
 																		
 																	</ul>
 																	<div class="career-area">
@@ -311,53 +314,63 @@ div.dataTables_wrapper {
 																					<td class="col-md-1">更新ユーザー</td>
 																					<td class="col-md-1"> </td>
 																				</tr>
-																				<tr class="career-data-item">
-																					<td class="col-md-1"><input type="text"
-																	class="form-control" id="name"
-																	maxlength="20" /></td>
-																					<td class="col-md-1"><input type="text"
-																	class="form-control" id="name"
-																	maxlength="20" /></td>
-																					<td class="col-md-1"><select>
-																						  <option value="volvo">Volvo</option>
-																						  <option value="saab">Saab</option>
-																						  <option value="mercedes">Mercedes</option>
-																						  <option value="audi">Audi</option>
-																						</select></td>
-																					<td class="col-md-1">
-																						<select>
-																						  <option value="volvo">Volvo</option>
-																						  <option value="saab">Saab</option>
-																						  <option value="mercedes">Mercedes</option>
-																						  <option value="audi">Audi</option>
-																						</select></td>
-																					<td class="col-md-1">
-																						<select>
-																						  <option value="volvo">Volvo</option>
-																						  <option value="saab">Saab</option>
-																						  <option value="mercedes">Mercedes</option>
-																						  <option value="audi">Audi</option>
-																						</select></td>
-																					<td class="col-md-1">
-																						<select>
-																						  <option value="volvo">Volvo</option>
-																						  <option value="saab">Saab</option>
-																						  <option value="mercedes">Mercedes</option>
-																						  <option value="audi">Audi</option>
-																						</select></td>
-																					<td class="col-md-1">
-																						<select>
-																						  <option value="volvo">Volvo</option>
-																						  <option value="saab">Saab</option>
-																						  <option value="mercedes">Mercedes</option>
-																						  <option value="audi">Audi</option>
-																						</select></td>
-																					<td class="col-md-1"><input type="text"
-																	class="form-control" id="name"
-																	maxlength="20" /></td>
-																					<td class="col-md-1"><input type="text"
-																	class="form-control" id="name"
-																	maxlength="20" /></td>
+																				<tr class="career-data-item" th:each="content, iterStat : ${contentAll[1]}">
+																					
+															<td class="col-md-1"><input type="text" class="form-control"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].startDateString'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].startDateString'"
+																th:value="${content.startDateString}" maxlength="20" /></td>
+															<td class="col-md-1"><input type="text" class="form-control"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].endDateString'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].endDateString'"
+																th:value="${content.endDateString}" maxlength="20" /></td>
+															<td class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].product'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].product'"
+																th:value="${content.product}">
+																	<option th:each="conf : ${content.seleteProduct}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+															<td class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].productDetail'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].productDetail'"
+																th:value="${content.productDetail}">
+																	<option th:each="conf : ${content.seleteProductDetail}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+															<td class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].function'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].function'"
+																th:value="${content.function}">
+																	<option th:each="conf : ${content.seleteFunction}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+															<td class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].functionDetail'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].functionDetail'"
+																th:value="${content.functionDetail}">
+																	<option
+																		th:each="conf : ${content.seleteFunctionDetail}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+															<td class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].location'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].location'"
+																th:value="${content.location}">
+																	<option th:each="conf : ${content.seleteLocation}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+															<td class="col-md-1"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].addUpdateDatetime'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].addUpdateDatetime'"
+																th:value="${content.addUpdateDatetime}"
+																th:text="${content.addUpdateDatetime}"></td>
+															<td class="col-md-1"
+																th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].userId'"
+																th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+']['+${iterStat.index}+'].userId'"
+																th:value="${content.userId}" th:text="${content.userId}"></td>
+																					
+													
 																					<td><a href="javascript:void(0)" class="add">+</a> <span class="delete">-</span></td></tr>
 																		
 	
@@ -373,6 +386,140 @@ div.dataTables_wrapper {
 													
 													
 													<!-- end loop1 -->
+													
+													
+													
+													<!-- kennmu -->
+													
+													<div th:attrappend="style=*{personCareerDataKenmuHeader == null ? 'display: none;' : ''}">
+															<div class="col-md-1" >兼務</div>
+															<div class="col-md-11">
+															
+															
+																<!-- loop2  header-->
+																<ul class="job-table clearfix"
+																	style="margin: 0; width: 100%;">
+
+																		<li class="wl-10">発令日</li>
+																		<li class="wl-10">異動区分</li>
+																		<li class="wl-10">異動理由</li>
+																		<li class="wl-10">所属</li>
+																		<li class="wl-10">役職</li>
+																		<li class="wl-10">勤務地</li>
+																		<li class="wl-15"><a href="javascript:void(0)" class="expand">広げる</a></li>
+		
+																</ul>
+																
+																
+																
+																
+																<!-- loop2  data-->
+																<div class="first">
+																	<ul class="job-table-data clearfix"
+																		style="margin: 0;width: 100%;">
+																	
+														<li class="wl-10" th:text="*{personCareerDataKenmuHeader.effectiveDate}"></li>
+														<li class="wl-10" th:text="*{personCareerDataKenmuHeader.action}"></li>
+														<li class="wl-10" th:text="*{personCareerDataKenmuHeader.actionReason}"></li>
+														<li class="wl-10" th:text="*{personCareerDataKenmuHeader.department}"></li>
+														<li class="wl-10" th:text="*{personCareerDataKenmuHeader.job}"></li>
+														<li class="wl-10" th:text="*{personCareerDataKenmuHeader.location}"></li>
+													
+																					
+																		<li class="wl-15"></li>
+																		
+																	</ul>
+																	<div class="career-area">
+																			
+																			<table class="table-condensed"
+																				style="border: 0; margin: 0; width: 100%;">
+																				
+																				
+																				<!-- loop3  header-->
+																				<tr>
+																					<td class="col-md-1">開始年月</td>
+																					<td class="col-md-1">終了年月</td>
+																					<td class="col-md-1">担当商品</td>
+																					<td class="col-md-1">担当商品詳細</td>
+																					<td class="col-md-1">担当機能</td>
+																					<td class="col-md-1">担当機能詳細</td>
+																					<td class="col-md-1">勤務地</td>
+																					<td class="col-md-1">更新日時</td>
+																					<td class="col-md-1">更新ユーザー</td>
+																					<td class="col-md-1"> </td>
+																				</tr>
+																				
+																				
+																				<!-- loop3  data-->
+																				<tr class="career-data-item" th:each="content, iterStat : *{personCareerDataKenmuDetailList}">
+																					<td class="col-md-1"><input type="text" class="form-control"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].startDateString'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].startDateString'"
+																th:value="${content.startDateString}" maxlength="20" /></td>
+																					<td class="col-md-1"><input type="text" class="form-control"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].endDateString'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].endDateString'"
+																th:value="${content.endDateString}" maxlength="20" /></td>
+																					<td  class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].product'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].product'"
+																th:value="${content.product}">
+																	<option th:each="conf : ${content.seleteProduct}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+																					<td class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].productDetail'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].productDetail'"
+																th:value="${content.productDetail}">
+																	<option th:each="conf : ${content.seleteProductDetail}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+																					<td  class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].function'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].function'"
+																th:value="${content.function}">
+																	<option th:each="conf : ${content.seleteFunction}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+																					<td class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].functionDetail'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].functionDetail'"
+																th:value="${content.functionDetail}">
+																	<option
+																		th:each="conf : ${content.seleteFunctionDetail}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+																					<td  class="col-md-1"><select class="form-control"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].location'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].location'"
+																th:value="${content.location}">
+																	<option th:each="conf : ${content.seleteLocation}"
+																		th:value="${conf.code}" th:text="${conf.name}"></option>
+															</select></td>
+															<td class="col-md-1"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].addUpdateDatetime'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].addUpdateDatetime'"
+																th:value="${content.addUpdateDatetime}"
+																th:text="${content.addUpdateDatetime}"></td>
+															<td  class="col-md-1"
+																th:id="'personCareerDataKenmuDetailList'+${iterStat.index}+'].userId'"
+																th:name="'personCareerDataKenmuDetailList'+${iterStat.index}+'].userId'"
+																th:value="${content.userId}" th:text="${content.userId}"></td>
+																					<td><a href="javascript:void(0)" class="add">+</a> <span class="delete">-</span></td></tr>
+																					<!-- end loop3 -->
+																					
+																			</table>
+																				
+																	</div>
+																</div>
+																<!-- end loop2 data -->
+																
+																
+																
+																
+															</div>
+													</div>
+													<!-- end kennmu -->
 												</div>
 											</div>
 										</div>
