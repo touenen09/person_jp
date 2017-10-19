@@ -744,7 +744,21 @@ div.dataTables_wrapper {
 						$('#goIndex').prop('disabled', true);
 					});
 
+
 			$('#doRegist').bind(
+					'click',
+					function() {
+						// if (confirm("登録してよろしいですか？")) {
+							$('#personCareerForm').attr("action",
+								/*[[@{/authorization/personcareer/doRegist}]]*/);
+							$('#personCareerForm').submit();
+							$('#doRegist').prop('disabled', true);
+						// }else{
+							// doNothing
+						// }
+					});
+
+			$('#doRegist_byyuanyuan').bind(
 					'click',
 					function() {
 						var startdata = $(".career-area").find(".needreset");

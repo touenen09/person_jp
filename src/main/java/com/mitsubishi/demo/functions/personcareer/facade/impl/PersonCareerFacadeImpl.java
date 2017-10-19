@@ -87,7 +87,9 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 
 		int i = 0;
 
-		if (personCareerDataExt.getStartDateString() != null && personCareerDataExt.getEndDateString() != null) {
+		if ((personCareerDataExt.getStartDateString() != null && !"".equals(personCareerDataExt.getStartDateString()))
+				&& (personCareerDataExt.getEndDateString() != null
+						&& !"".equals(personCareerDataExt.getEndDateString()))) {
 			personCareerDataExt.setStartDate(DateUtil.convertStringToDate(personCareerDataExt.getStartDateString(),
 					DateUtil.DATE_PATTERN_DATE_MOL));
 			personCareerDataExt.setEndDate(DateUtil.convertStringToDate(personCareerDataExt.getEndDateString(),
