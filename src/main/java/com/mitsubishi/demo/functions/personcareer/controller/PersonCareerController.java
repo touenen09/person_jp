@@ -191,8 +191,6 @@ public class PersonCareerController {
 				personJobHistoryTableExt.setLocationName(
 						getInformationTableValue("Location", personJobHistoryTableExt.getLocation(), "@NULL"));
 
-				form.setPersonCareerDataSyumuHeader(personJobHistoryTableExt);
-
 				personCareerDataHistory.setPersonJobHistoryTableExt(personJobHistoryTableExt);
 
 				// 従業員主務詳細情報セット
