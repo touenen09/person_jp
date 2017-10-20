@@ -195,7 +195,9 @@ div.dataTables_wrapper {
 																<li class="wl-10">役職</li>
 																<li class="wl-10">勤務地</li>
 																<li class="wl-15"><a href="javascript:void(0)"
-																	class="expand" th:attrappend="style=*{personCareerDataSyumuHistoryList == null ? 'display: none;' : ''}">広げる</a></li>
+																	class="expand" 
+																	th:attrappend="style=*{(personCareerDataSyumuHistoryList == null || personCareerDataSyumuHistoryList[0] == null || personCareerDataSyumuHistoryList[0].personJobHistoryTableExt == null || personCareerDataSyumuHistoryList[0].personJobHistoryTableExt.personNum == null) ? 'display: none;' : ''}"
+																>広げる</a></li>
 
 															</ul>
 
