@@ -345,8 +345,9 @@ div.dataTables_wrapper {
 
 															<!-- loop2  data-->
 															<div
-																th:if="*{personCareerDataSyumuHistoryList != null}"
-																th:each="contentAll, iterStatAll : *{personCareerDataSyumuHistoryList}" 
+
+																th:attrappend="style=*{(personCareerDataSyumuHistoryList == null || personCareerDataSyumuHistoryList[0] == null || personCareerDataSyumuHistoryList[0].personJobHistoryTableExt == null || personCareerDataSyumuHistoryList[0].personJobHistoryTableExt.personNum == null) ? 'display: none;' : ''}"
+																th:each="contentAll, iterStatAll : *{personCareerDataSyumuHistoryList}"
 
 																class="none">
 																<ul class="job-table-data clearfix"
