@@ -125,7 +125,7 @@ div.dataTables_wrapper {
 														style="border: 0; margin: 0; cellSpacing: 0; cellPadding: 0; width: 100%;">
 														<tr>
 															<td class="col-md-2" rowspan="4"><img alt=""
-																th:src="*{personTableForm.photo}"></img></td>
+																th:src="*{personTableForm.photo}" height="160" width="120"></img></td>
 															<td class="col-md-10" colspan="5">
 																<table class="table-condensed"
 																	style="border: 0; margin: 0; cellSpacing: 0; cellPadding: 0; width: 100%;">
@@ -218,7 +218,7 @@ div.dataTables_wrapper {
 																	<li class="wl-10"
 																		th:text="*{personCareerDataSyumuHeader.job}"></li>
 																	<li class="wl-10"
-																		th:text="*{personCareerDataSyumuHeader.locationName}"></li>
+																		th:text="*{personCareerDataSyumuHeader.location}"></li>
 
 
 																	<li class="wl-15"></li>
@@ -270,8 +270,10 @@ div.dataTables_wrapper {
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
-																			<td class="col-md-1"><select
-																				class="form-control SelectProduct"
+																			<td class="col-md-1"><input type="hidden"
+																				id="group1"
+																				th:value="*{personCareerDataSyumuHeader.group1}" />
+																				<select class="form-control SelectProduct"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].product'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
@@ -289,7 +291,9 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-1"><input type="hidden"
+																				id="group1"
+																				th:value="*{personCareerDataSyumuHeader.group1}" /><select
 																				class="form-control SelectFunction"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].function'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].function'"
@@ -357,7 +361,7 @@ div.dataTables_wrapper {
 																	<li class="wl-10"
 																		th:text="${contentAll.personJobHistoryTableExt.job}"></li>
 																	<li class="wl-10"
-																		th:text="${contentAll.personJobHistoryTableExt.locationName}"></li>
+																		th:text="${contentAll.personJobHistoryTableExt.location}"></li>
 
 																	<li class="wl-15"></li>
 
@@ -411,7 +415,9 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-1"><input type="hidden"
+																				id="group1"
+																				th:value="${contentAll.personJobHistoryTableExt.group1}" /><select
 																				class="form-control"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].productDetail'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].productDetail'"
@@ -421,7 +427,9 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-1"><input type="hidden"
+																				id="group1"
+																				th:value="${contentAll.personJobHistoryTableExt.group1}" /><select
 																				class="form-control SelectFunction"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].function'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].function'"
@@ -574,7 +582,9 @@ div.dataTables_wrapper {
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-1"><input type="hidden"
+																				id="group1"
+																				th:value="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.group1}):''" /><select
 																				class="form-control SelectProduct"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].product'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].product'"
@@ -593,7 +603,9 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-1"><input type="hidden"
+																				id="group1"
+																				th:value="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.group1}):''" /><select
 																				class="form-control SelectFunction"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].function'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].function'"
@@ -740,7 +752,7 @@ div.dataTables_wrapper {
 			$('#goIndex').bind(
 					'click',
 					function() {
-						location.href = /*[[@{/menu}]]*/;
+						location.href = /*[[@{/authorization/person/goIndex/1}]]*/;
 						$('#goIndex').prop('disabled', true);
 					});
 
@@ -759,12 +771,14 @@ div.dataTables_wrapper {
 					});
 
 			$career_area.on('change', '.SelectProduct', function(){
+				var key1 = $(this).parent().find('#group1').val();
 				var key2 = $(this).val();
 				var nextElement = $(this).parent().next().find('select');
 				nextElement.find('option').remove();
 
 				var url = /*[[@{/authorization/ajax/product/detail/}]]*/;
-				url = url + key2;
+				url = url + key1;
+				url = url + '/' + key2;
 				$.getJSON( url, function( data ) {
 					$.each( data, function( key, val ) {
 						if("data" == key){
@@ -779,12 +793,14 @@ div.dataTables_wrapper {
 			});
 
 			$career_area.on('change', '.SelectFunction', function(){
+				var key1 = $(this).parent().find('#group1').val();
 				var key2 = $(this).val();
 				var nextElement = $(this).parent().next().find('select');
 				nextElement.find('option').remove();
 
 				var url = /*[[@{/authorization/ajax/function/detail/}]]*/;
-				url = url + key2;
+				url = url + key1;
+				url = url + '/' + key2;
 				$.getJSON( url, function( data ) {
 					$.each( data, function( key, val ) {
 						if("data" == key){

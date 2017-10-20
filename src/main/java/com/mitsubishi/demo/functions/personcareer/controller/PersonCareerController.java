@@ -106,8 +106,9 @@ public class PersonCareerController {
 					.setActionName(getInformationTableValue("Action", personJobHistoryTableExt.getAction(), "@NULL"));
 			personJobHistoryTableExt.setActionReasonName(getInformationTableValue("Action",
 					personJobHistoryTableExt.getAction(), personJobHistoryTableExt.getActionReason()));
-			personJobHistoryTableExt.setLocationName(
-					getInformationTableValue("Location", personJobHistoryTableExt.getLocation(), "@NULL"));
+			// personJobHistoryTableExt.setLocationName(
+			// getInformationTableValue("Location", personJobHistoryTableExt.getLocation(),
+			// "@NULL"));
 
 			form.setPersonCareerDataSyumuHeader(personJobHistoryTableExt);
 
@@ -143,18 +144,24 @@ public class PersonCareerController {
 				List<ListInfo> seleteFunctionDetail = new ArrayList<ListInfo>();
 				List<ListInfo> seleteLocation = new ArrayList<ListInfo>();
 
-				if ("1".equals(personJobHistoryTable.getGroup1())) {
+				if ("01".equals(personJobHistoryTable.getGroup1())) {
 
-					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
-					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
-					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
-					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
+					seleteProduct.addAll(getListInfo("Product1", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function1", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), "NOTNULL"));
+				} else if ("02".equals(personJobHistoryTable.getGroup1())) {
+
+					seleteProduct.addAll(getListInfo("Product2", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function2", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), "NOTNULL"));
 				} else {
 
-					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
-					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
-					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
-					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
+					seleteProduct.addAll(getListInfo("Product3", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product3", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function3", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function3", personCareerDataExt.getFunction(), "NOTNULL"));
 				}
 
 				seleteLocation.addAll(getListInfo("Location", "NULL", "@NULL"));
@@ -190,8 +197,9 @@ public class PersonCareerController {
 						getInformationTableValue("Action", personJobHistoryTableExt.getAction(), "@NULL"));
 				personJobHistoryTableExt.setActionReasonName(getInformationTableValue("Action",
 						personJobHistoryTableExt.getAction(), personJobHistoryTableExt.getActionReason()));
-				personJobHistoryTableExt.setLocationName(
-						getInformationTableValue("Location", personJobHistoryTableExt.getLocation(), "@NULL"));
+				// personJobHistoryTableExt.setLocationName(
+				// getInformationTableValue("Location", personJobHistoryTableExt.getLocation(),
+				// "@NULL"));
 
 				personCareerDataHistory.setPersonJobHistoryTableExt(personJobHistoryTableExt);
 
@@ -229,20 +237,30 @@ public class PersonCareerController {
 					List<ListInfo> seleteFunctionDetail = new ArrayList<ListInfo>();
 					List<ListInfo> seleteLocation = new ArrayList<ListInfo>();
 
-					if ("1".equals(personJobHistoryTable.getGroup1())) {
+					if ("01".equals(personJobHistoryTable.getGroup1())) {
 
-						seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
-						seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
-						seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+						seleteProduct.addAll(getListInfo("Product1", "NULL", "@NULL"));
+						seleteProductDetail
+								.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), "NOTNULL"));
+						seleteFunction.addAll(getListInfo("Function1", "NULL", "@NULL"));
 						seleteFunctionDetail
-								.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
+								.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), "NOTNULL"));
+					} else if ("02".equals(personJobHistoryTable.getGroup1())) {
+
+						seleteProduct.addAll(getListInfo("Product2", "NULL", "@NULL"));
+						seleteProductDetail
+								.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), "NOTNULL"));
+						seleteFunction.addAll(getListInfo("Function2", "NULL", "@NULL"));
+						seleteFunctionDetail
+								.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), "NOTNULL"));
 					} else {
 
-						seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
-						seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
-						seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
+						seleteProduct.addAll(getListInfo("Product3", "NULL", "@NULL"));
+						seleteProductDetail
+								.addAll(getListInfo("Product3", personCareerDataExt.getProduct(), "NOTNULL"));
+						seleteFunction.addAll(getListInfo("Function3", "NULL", "@NULL"));
 						seleteFunctionDetail
-								.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
+								.addAll(getListInfo("Function3", personCareerDataExt.getFunction(), "NOTNULL"));
 					}
 
 					seleteLocation.addAll(getListInfo("Location", "NULL", "@NULL"));
@@ -297,8 +315,11 @@ public class PersonCareerController {
 					getInformationTableValue("Action", personJobHistoryTableKenmuExt.getAction(), "@NULL"));
 			personJobHistoryTableKenmuExt.setActionReasonName(getInformationTableValue("Action",
 					personJobHistoryTableKenmuExt.getAction(), personJobHistoryTableKenmuExt.getActionReason()));
-			personJobHistoryTableKenmuExt.setLocationName(
-					getInformationTableValue("Location", personJobHistoryTableKenmuExt.getLocation(), "@NULL"));
+			/*
+			 * personJobHistoryTableKenmuExt.setLocationName(
+			 * getInformationTableValue("Location",
+			 * personJobHistoryTableKenmuExt.getLocation(), "@NULL"));
+			 */
 
 			form.setPersonCareerDataKenmuHeader(personJobHistoryTableKenmuExt);
 
@@ -321,8 +342,10 @@ public class PersonCareerController {
 				BeanUtils.copyProperties(personCareerData, personCareerDataExt);
 				personCareerDataExt.setStartDateString(DateUtil.convertDateToString(personCareerDataExt.getStartDate(),
 						DateUtil.DATE_PATTERN_DATE_MOL));
-				personCareerDataExt.setEndDateString(
-						DateUtil.convertDateToString(personCareerDataExt.getEndDate(), DateUtil.DATE_PATTERN_DATE_MOL));
+				if (personCareerDataExt.getEndDate() != null) {
+					personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
+							DateUtil.DATE_PATTERN_DATE_MOL));
+				}
 
 				/**
 				 * select list
@@ -333,18 +356,24 @@ public class PersonCareerController {
 				List<ListInfo> seleteFunctionDetail = new ArrayList<ListInfo>();
 				List<ListInfo> seleteLocation = new ArrayList<ListInfo>();
 
-				if ("1".equals(personJobHistoryTableKenmu.getGroup1())) {
+				if ("01".equals(personJobHistoryTableKenmu.getGroup1())) {
 
-					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
-					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
-					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
-					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
+					seleteProduct.addAll(getListInfo("Product1", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product1", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function1", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function1", personCareerDataExt.getFunction(), "NOTNULL"));
+				} else if ("02".equals(personJobHistoryTableKenmu.getGroup1())) {
+
+					seleteProduct.addAll(getListInfo("Product2", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product2", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function2", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function2", personCareerDataExt.getFunction(), "NOTNULL"));
 				} else {
 
-					seleteProduct.addAll(getListInfo("Product", "NULL", "@NULL"));
-					seleteProductDetail.addAll(getListInfo("Product", personCareerDataExt.getProduct(), "NOTNULL"));
-					seleteFunction.addAll(getListInfo("Function", "NULL", "@NULL"));
-					seleteFunctionDetail.addAll(getListInfo("Function", personCareerDataExt.getFunction(), "NOTNULL"));
+					seleteProduct.addAll(getListInfo("Product3", "NULL", "@NULL"));
+					seleteProductDetail.addAll(getListInfo("Product3", personCareerDataExt.getProduct(), "NOTNULL"));
+					seleteFunction.addAll(getListInfo("Function3", "NULL", "@NULL"));
+					seleteFunctionDetail.addAll(getListInfo("Function3", personCareerDataExt.getFunction(), "NOTNULL"));
 				}
 
 				seleteLocation.addAll(getListInfo("Location", "NULL", "@NULL"));
