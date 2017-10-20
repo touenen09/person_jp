@@ -92,6 +92,8 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 		// 特別処理
 		if (personNum.contains(",")) {
 			String[] personNumArray = personNum.split(",");
+			String[] appointmentArray = personCareerDataExt.getAppointment().split(",");
+			Date effectiveDate = personCareerDataExt.getEffectiveDate();
 			String[] startDateStringArray = personCareerDataExt.getStartDateString().split(",");
 			String[] endDateStringArray = null;
 			if (personCareerDataExt.getEndDateString() != null && !"".equals(personCareerDataExt.getEndDateString())) {
@@ -108,6 +110,8 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 
 				PersonCareerDataExt tmpPersonCareerDataExt = new PersonCareerDataExt();
 				tmpPersonCareerDataExt.setPersonNum(personNumArray[j]);
+				tmpPersonCareerDataExt.setAppointment(appointmentArray[j]);
+				tmpPersonCareerDataExt.setEffectiveDate(effectiveDate);
 				tmpPersonCareerDataExt.setStartDateString(startDateStringArray[j]);
 
 				if (endDateStringArray != null && endDateStringArray.length > j) {

@@ -406,7 +406,9 @@ div.dataTables_wrapper {
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].endDateString'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-1"><input type="hidden"
+																				id="group1"
+																				th:value="${contentAll.personJobHistoryTableExt.group1}" /><select
 																				class="form-control SelectProduct"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].product'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].product'"
@@ -415,9 +417,7 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
-																			<td class="col-md-1"><input type="hidden"
-																				id="group1"
-																				th:value="${contentAll.personJobHistoryTableExt.group1}" /><select
+																			<td class="col-md-1"><select
 																				class="form-control"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].productDetail'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].productDetail'"
@@ -676,6 +676,10 @@ div.dataTables_wrapper {
 															<button type="button" id="goIndex"
 																class="btn btn-primary" style="width: 150px">ｷｬﾝｾﾙ</button>
 														</td>
+														<td class="col-md-2">
+															<button id="doRegist_test" type="button"
+																class="btn btn-primary" th:style="${doRegistButtonCss}">登録NoCheck</button>
+														</td>
 													</tr>
 												</table>
 											</div>
@@ -697,8 +701,6 @@ div.dataTables_wrapper {
 
 	<script th:inline="javascript">
 	/*<![CDATA[*/
-
-
 	$(document).ready(
 		function() {
 
@@ -833,7 +835,7 @@ div.dataTables_wrapper {
 				});
 			});
 
-			$('#doRegist').bind(
+			$('#doRegist_test').bind(
 					'click',
 					function() {
 
@@ -847,8 +849,7 @@ div.dataTables_wrapper {
 						// }
 					});
 
-
-			$('#doRegist2').bind(
+			$('#doRegist').bind(
 					'click',
 					function() {
 						var startdata = $(".career-area").find(".needreset");
@@ -881,8 +882,6 @@ div.dataTables_wrapper {
 							// doNothing
 						// }
 					});
-
-
 
 	});
 		/*]]>*/
