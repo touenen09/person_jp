@@ -129,8 +129,10 @@ public class PersonCareerController {
 				BeanUtils.copyProperties(personCareerData, personCareerDataExt);
 				personCareerDataExt.setStartDateString(DateUtil.convertDateToString(personCareerDataExt.getStartDate(),
 						DateUtil.DATE_PATTERN_DATE_MOL));
-				personCareerDataExt.setEndDateString(
-						DateUtil.convertDateToString(personCareerDataExt.getEndDate(), DateUtil.DATE_PATTERN_DATE_MOL));
+				if (personCareerDataExt.getEndDate() != null) {
+					personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
+							DateUtil.DATE_PATTERN_DATE_MOL));
+				}
 
 				/**
 				 * select list
@@ -212,8 +214,11 @@ public class PersonCareerController {
 					BeanUtils.copyProperties(personCareerData, personCareerDataExt);
 					personCareerDataExt.setStartDateString(DateUtil
 							.convertDateToString(personCareerDataExt.getStartDate(), DateUtil.DATE_PATTERN_DATE_MOL));
-					personCareerDataExt.setEndDateString(DateUtil.convertDateToString(personCareerDataExt.getEndDate(),
-							DateUtil.DATE_PATTERN_DATE_MOL));
+
+					if (personCareerDataExt.getEndDate() != null) {
+						personCareerDataExt.setEndDateString(DateUtil
+								.convertDateToString(personCareerDataExt.getEndDate(), DateUtil.DATE_PATTERN_DATE_MOL));
+					}
 
 					/**
 					 * select list

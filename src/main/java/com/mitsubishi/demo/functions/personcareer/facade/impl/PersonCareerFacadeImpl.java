@@ -93,7 +93,10 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 		if (personNum.contains(",")) {
 			String[] personNumArray = personNum.split(",");
 			String[] startDateStringArray = personCareerDataExt.getStartDateString().split(",");
-			String[] endDateStringArray = personCareerDataExt.getEndDateString().split(",");
+			String[] endDateStringArray = null;
+			if (personCareerDataExt.getEndDateString() != null && !"".equals(personCareerDataExt.getEndDateString())) {
+				endDateStringArray = personCareerDataExt.getEndDateString().split(",");
+			}
 
 			String[] productArray = personCareerDataExt.getProduct().split(",");
 			String[] productDetailArray = personCareerDataExt.getProductDetail().split(",");
@@ -106,7 +109,11 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 				PersonCareerDataExt tmpPersonCareerDataExt = new PersonCareerDataExt();
 				tmpPersonCareerDataExt.setPersonNum(personNumArray[j]);
 				tmpPersonCareerDataExt.setStartDateString(startDateStringArray[j]);
-				tmpPersonCareerDataExt.setEndDateString(endDateStringArray[j]);
+
+				if (endDateStringArray != null) {
+					tmpPersonCareerDataExt.setEndDateString(endDateStringArray[j]);
+				}
+
 				tmpPersonCareerDataExt.setProduct(productArray[j]);
 				tmpPersonCareerDataExt.setProductDetail(productDetailArray[j]);
 				tmpPersonCareerDataExt.setFunction(functionArray[j]);
@@ -126,14 +133,14 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 
 		int i = 0;
 
-		if ((personCareerDataExt.getStartDateString() != null && !"".equals(personCareerDataExt.getStartDateString()))
-				&& (personCareerDataExt.getEndDateString() != null
-						&& !"".equals(personCareerDataExt.getEndDateString()))) {
+		if (personCareerDataExt.getStartDateString() != null && !"".equals(personCareerDataExt.getStartDateString())) {
 
 			personCareerDataExt.setStartDate(DateUtil.convertStringToDate(personCareerDataExt.getStartDateString(),
 					DateUtil.DATE_PATTERN_DATE_MOL));
-			personCareerDataExt.setEndDate(DateUtil.convertStringToDate(personCareerDataExt.getEndDateString(),
-					DateUtil.DATE_PATTERN_DATE_MOL));
+			if (personCareerDataExt.getEndDateString() != null && !"".equals(personCareerDataExt.getEndDateString())) {
+				personCareerDataExt.setEndDate(DateUtil.convertStringToDate(personCareerDataExt.getEndDateString(),
+						DateUtil.DATE_PATTERN_DATE_MOL));
+			}
 
 			PersonCareerData personCareerData = new PersonCareerData();
 			BeanUtils.copyProperties(personCareerDataExt, personCareerData);
