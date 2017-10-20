@@ -271,7 +271,7 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><select
-																				class="form-control"
+																				class="form-control SelectProduct"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].product'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
@@ -290,7 +290,7 @@ div.dataTables_wrapper {
 																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
-																				class="form-control"
+																				class="form-control SelectFunction"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].function'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].function'"
 																				th:value="${content.function}">
@@ -403,7 +403,7 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><select
-																				class="form-control"
+																				class="form-control SelectProduct"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].product'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
@@ -422,7 +422,7 @@ div.dataTables_wrapper {
 																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
-																				class="form-control"
+																				class="form-control SelectFunction"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].function'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].function'"
 																				th:value="${content.function}">
@@ -575,7 +575,7 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].endDateString'"
 																				th:value="${content.endDateString}" maxlength="20" /></td>
 																			<td class="col-md-1"><select
-																				class="form-control"
+																				class="form-control SelectProduct"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].product'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].product'"
 																				th:value="${content.product}">
@@ -594,7 +594,7 @@ div.dataTables_wrapper {
 																						th:selected="${conf.code} == ${content.productDetail}"></option>
 																			</select></td>
 																			<td class="col-md-1"><select
-																				class="form-control"
+																				class="form-control SelectFunction"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].function'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].function'"
 																				th:value="${content.function}">
@@ -757,6 +757,53 @@ div.dataTables_wrapper {
 							// doNothing
 						// }
 					});
+
+			$('.SelectProduct').on('change', function(){
+				var key2 = $(this).val();
+				$(this).parent().next().find('select').find('option').remove();
+
+				var url = /*[[@{/authorization/ajax/product/detail/}]]*/;
+				url = url + key2;
+				$.getJSON( url, function( data ) {
+					$.each( data, function( key, val ) {
+						if("data" == key){
+							alert("key:" + key);
+							alert("val:" + val);
+							for (var j in val) {
+								var option = $('<option />');
+								alert(val[j].code);
+								option.val(val[j].code);
+								option.html(val[j].name);
+						 		$(this).parent().next().find('select').append(option);
+							}
+						}
+					});
+				});
+			});
+
+			$('.SelectFunction').change(function(){
+				var key2 = $(this).val();
+			  	$(this).parent().next().find('select').find('option').remove();
+
+				var url = /*[[@{/authorization/ajax/function/detail/}]]*/;
+				url = url + key2;
+				$.getJSON( url, function( data ) {
+					$.each( data, function( key, val ) {
+						if("data" == key){
+							alert("key:" + key);
+							alert("val:" + val);
+							for (var j in val) {
+								var option = $('<option />');
+								alert(val[j].code);
+								option.val(val[j].code);
+								option.html(val[j].name);
+						 		$(this).parent().next().find('select').append(option);
+							}
+						}
+					});
+				});
+			});
+
 
 			$('#doRegist_byyuanyuan').bind(
 					'click',
