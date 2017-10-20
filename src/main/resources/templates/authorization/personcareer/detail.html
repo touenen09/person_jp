@@ -195,7 +195,7 @@ div.dataTables_wrapper {
 																<li class="wl-10">役職</li>
 																<li class="wl-10">勤務地</li>
 																<li class="wl-15"><a href="javascript:void(0)"
-																	class="expand">広げる</a></li>
+																	class="expand" th:attrappend="style=*{personCareerDataSyumuHistoryList == null ? 'display: none;' : ''}">広げる</a></li>
 
 															</ul>
 
@@ -203,7 +203,7 @@ div.dataTables_wrapper {
 
 
 															<!-- loop2  data-->
-															<div class="first">
+															<div class="first" th:attrappend="style=*{personCareerDataSyumuHeader == null ? 'display: none;' : ''}">
 																<ul class="job-table-data clearfix"
 																	style="margin: 0; width: 100%;">
 
@@ -345,7 +345,9 @@ div.dataTables_wrapper {
 
 															<!-- loop2  data-->
 															<div
-																th:each="contentAll, iterStatAll : *{personCareerDataSyumuHistoryList}"
+																th:if="*{personCareerDataSyumuHistoryList != null}"
+																th:each="contentAll, iterStatAll : *{personCareerDataSyumuHistoryList}" 
+
 																class="none">
 																<ul class="job-table-data clearfix"
 																	style="margin: 0; width: 100%;">
@@ -507,8 +509,7 @@ div.dataTables_wrapper {
 																<li class="wl-10">所属</li>
 																<li class="wl-10">役職</li>
 																<li class="wl-10">勤務地</li>
-																<li class="wl-15"><a href="javascript:void(0)"
-																	class="expand">広げる</a></li>
+																<li class="wl-15"></li>
 
 															</ul>
 
