@@ -68,7 +68,7 @@ div.dataTables_wrapper {
 														style="border: 0; margin: 0; cellSpacing: 0; cellPadding: 0;">
 														<tr>
 															<td class="col-md-2">従業員番号</td>
-															<td class="col-md-2"><input type="text"
+															<td class="col-md-2" th:text="*{personNum}"><input type="hidden"
 																class="form-control" id="personNum"
 																th:field="*{personNum}" maxlength="20" /></td>
 															<td class="col-md-2">顔写真</td>
