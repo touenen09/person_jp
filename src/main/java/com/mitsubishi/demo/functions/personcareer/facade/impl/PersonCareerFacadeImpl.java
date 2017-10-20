@@ -51,7 +51,7 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 			List<PersonCareerDataExt> personCareerDataSyumuDetailList = form.getPersonCareerDataSyumuDetailList();
 
 			for (PersonCareerDataExt personCareerDataExt : personCareerDataSyumuDetailList) {
-				insertCount += insertPersonCareerData(personCareerDataExt);
+				insertCount += insertPersonCareerDataAll(personCareerDataExt);
 			}
 
 			// 主務歴史ヘッダと詳細リスト,0:ヘッダ,1:詳細
@@ -62,7 +62,7 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 					List<PersonCareerDataExt> personCareerDataExtHistoryList = personCareerDataHistory
 							.getPersonCareerDataExtHistoryList();
 					for (PersonCareerDataExt personCareerDataExt : personCareerDataExtHistoryList) {
-						insertCount += insertPersonCareerData(personCareerDataExt);
+						insertCount += insertPersonCareerDataAll(personCareerDataExt);
 					}
 				}
 			}
@@ -72,7 +72,7 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 
 			if (personCareerDataKenmuDetailList != null) {
 				for (PersonCareerDataExt personCareerDataExt : personCareerDataKenmuDetailList) {
-					insertCount += insertPersonCareerData(personCareerDataExt);
+					insertCount += insertPersonCareerDataAll(personCareerDataExt);
 				}
 			}
 
@@ -83,6 +83,45 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 		return insertCount;
 	}
 
+	private int insertPersonCareerDataAll(PersonCareerDataExt personCareerDataExt) throws ParseException {
+
+		int i = 0;
+
+		String personNum = personCareerDataExt.getPersonNum();
+
+		// 特別処理
+		if (personNum.contains(",")) {
+			String[] personNumArray = personNum.split(",");
+			String[] startDateStringArray = personCareerDataExt.getStartDateString().split(",");
+			String[] endDateStringArray = personCareerDataExt.getEndDateString().split(",");
+
+			String[] productArray = personCareerDataExt.getProduct().split(",");
+			String[] productDetailArray = personCareerDataExt.getProductDetail().split(",");
+			String[] functionArray = personCareerDataExt.getFunction().split(",");
+			String[] functionDetailArray = personCareerDataExt.getFunctionDetail().split(",");
+			String[] locationArray = personCareerDataExt.getLocation().split(",");
+
+			for (int j = 0; j < locationArray.length; j++) {
+
+				PersonCareerDataExt tmpPersonCareerDataExt = new PersonCareerDataExt();
+				tmpPersonCareerDataExt.setPersonNum(personNumArray[j]);
+				tmpPersonCareerDataExt.setStartDateString(startDateStringArray[j]);
+				tmpPersonCareerDataExt.setEndDateString(endDateStringArray[j]);
+				tmpPersonCareerDataExt.setProduct(productArray[j]);
+				tmpPersonCareerDataExt.setProductDetail(productDetailArray[j]);
+				tmpPersonCareerDataExt.setFunction(functionArray[j]);
+				tmpPersonCareerDataExt.setFunctionDetail(functionDetailArray[j]);
+				tmpPersonCareerDataExt.setLocation(locationArray[j]);
+				i += insertPersonCareerData(tmpPersonCareerDataExt);
+			}
+
+		} else {
+			i += insertPersonCareerData(personCareerDataExt);
+		}
+
+		return i;
+	}
+
 	private int insertPersonCareerData(PersonCareerDataExt personCareerDataExt) throws ParseException {
 
 		int i = 0;
@@ -90,6 +129,7 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 		if ((personCareerDataExt.getStartDateString() != null && !"".equals(personCareerDataExt.getStartDateString()))
 				&& (personCareerDataExt.getEndDateString() != null
 						&& !"".equals(personCareerDataExt.getEndDateString()))) {
+
 			personCareerDataExt.setStartDate(DateUtil.convertStringToDate(personCareerDataExt.getStartDateString(),
 					DateUtil.DATE_PATTERN_DATE_MOL));
 			personCareerDataExt.setEndDate(DateUtil.convertStringToDate(personCareerDataExt.getEndDateString(),
@@ -102,8 +142,7 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 			personCareerData.setEffectiveDate(DateUtil.removeTime(personCareerData.getEffectiveDate()));
 			personCareerData.setAddUpdateDatetime(new Date());
 			personCareerData.setUserId("Admin");
-
-			i = personCareerDataService.insert(personCareerData);
+			i += personCareerDataService.insert(personCareerData);
 		}
 
 		return i;
