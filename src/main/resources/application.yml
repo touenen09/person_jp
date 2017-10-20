@@ -15,6 +15,9 @@ spring.datasource.druid.test-on-borrow: true
 
 server.port: 8585
 
+server:
+  context-path: /mitsubishi
+
 spring.thymeleaf.cache: false
 spring.thymeleaf.prefix: classpath:/templates/
 

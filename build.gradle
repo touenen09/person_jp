@@ -16,11 +16,14 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 
 group = 'com.mitsubishi.demo'
-version = '1.0.0'
 sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+}
+
+war {
+    archiveName = 'mitsubishi.war'
 }
 
 configurations {
