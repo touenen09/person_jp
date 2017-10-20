@@ -760,21 +760,18 @@ div.dataTables_wrapper {
 
 			$('.SelectProduct').on('change', function(){
 				var key2 = $(this).val();
-				$(this).parent().next().find('select').find('option').remove();
+				var nextElement = $(this).parent().next().find('select');
+				nextElement.find('option').remove();
 
 				var url = /*[[@{/authorization/ajax/product/detail/}]]*/;
 				url = url + key2;
 				$.getJSON( url, function( data ) {
 					$.each( data, function( key, val ) {
 						if("data" == key){
-							alert("key:" + key);
-							alert("val:" + val);
 							for (var j in val) {
-								var option = $('<option />');
-								alert(val[j].code);
-								option.val(val[j].code);
-								option.html(val[j].name);
-						 		$(this).parent().next().find('select').append(option);
+								var zokusei = {value: val[j].code, text:val[j].name};  //属性を生成
+								var yoso = $('<option>', zokusei);
+						 		nextElement.append(yoso);
 							}
 						}
 					});
@@ -783,21 +780,18 @@ div.dataTables_wrapper {
 
 			$('.SelectFunction').change(function(){
 				var key2 = $(this).val();
-			  	$(this).parent().next().find('select').find('option').remove();
+				var nextElement = $(this).parent().next().find('select');
+				nextElement.find('option').remove();
 
 				var url = /*[[@{/authorization/ajax/function/detail/}]]*/;
 				url = url + key2;
 				$.getJSON( url, function( data ) {
 					$.each( data, function( key, val ) {
 						if("data" == key){
-							alert("key:" + key);
-							alert("val:" + val);
 							for (var j in val) {
-								var option = $('<option />');
-								alert(val[j].code);
-								option.val(val[j].code);
-								option.html(val[j].name);
-						 		$(this).parent().next().find('select').append(option);
+								var zokusei = {value: val[j].code, text:val[j].name};  //属性を生成
+								var yoso = $('<option>', zokusei);
+						 		nextElement.append(yoso);
 							}
 						}
 					});
