@@ -758,7 +758,7 @@ div.dataTables_wrapper {
 						// }
 					});
 
-			$('.SelectProduct').on('change', function(){
+			$career_area.on('change', '.SelectProduct', function(){
 				var key2 = $(this).val();
 				var nextElement = $(this).parent().next().find('select');
 				nextElement.find('option').remove();
@@ -778,7 +778,7 @@ div.dataTables_wrapper {
 				});
 			});
 
-			$('.SelectFunction').change(function(){
+			$career_area.on('change', '.SelectFunction', function(){
 				var key2 = $(this).val();
 				var nextElement = $(this).parent().next().find('select');
 				nextElement.find('option').remove();
