@@ -110,7 +110,7 @@ public class PersonCareerFacadeImpl implements PersonCareerFacade {
 				tmpPersonCareerDataExt.setPersonNum(personNumArray[j]);
 				tmpPersonCareerDataExt.setStartDateString(startDateStringArray[j]);
 
-				if (endDateStringArray != null) {
+				if (endDateStringArray != null && endDateStringArray.length > j) {
 					tmpPersonCareerDataExt.setEndDateString(endDateStringArray[j]);
 				}
 

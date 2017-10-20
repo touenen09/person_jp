@@ -697,8 +697,8 @@ div.dataTables_wrapper {
 
 	<script th:inline="javascript">
 	/*<![CDATA[*/
-	
-	
+
+
 	$(document).ready(
 		function() {
 
@@ -721,23 +721,23 @@ div.dataTables_wrapper {
 
 				});
 			}
-			
+
 			function isDate(dateString){
 		          if(dateString.trim()=="")return false;
 		          //年月日正则表达式
-		          var r=dateString.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/); 
+		          var r=dateString.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
 		          if(r==null){
-		          
+
 		             return false;
 		          }
-		          var d=new Date(r[1],r[3]-1,r[4]);   
+		          var d=new Date(r[1],r[3]-1,r[4]);
 		          var num = (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]);
 		          if(num==0){
 		            return false;
 		          }
 		          return true;
-		          
-		        }; 
+
+		        };
 
 			$career_area.on("click","a.add",function(e){
 				var item = $(this).parents('.career-data-item');
@@ -833,8 +833,22 @@ div.dataTables_wrapper {
 				});
 			});
 
-
 			$('#doRegist').bind(
+					'click',
+					function() {
+
+						// if (confirm("登録してよろしいですか？")) {
+							$('#personCareerForm').attr("action",
+								/*[[@{/authorization/personcareer/doRegist}]]*/);
+							$('#personCareerForm').submit();
+							$('#doRegist').prop('disabled', true);
+						// }else{
+							// doNothing
+						// }
+					});
+
+
+			$('#doRegist2').bind(
 					'click',
 					function() {
 						var startdata = $(".career-area").find(".needreset");
@@ -869,7 +883,7 @@ div.dataTables_wrapper {
 					});
 
 
-	
+
 	});
 		/*]]>*/
 	</script>
