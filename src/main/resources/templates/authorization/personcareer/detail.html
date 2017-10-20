@@ -685,6 +685,8 @@ div.dataTables_wrapper {
 
 	<script th:inline="javascript">
 	/*<![CDATA[*/
+	
+	
 	$(document).ready(
 		function() {
 
@@ -707,6 +709,23 @@ div.dataTables_wrapper {
 
 				});
 			}
+			
+			function isDate(dateString){
+		          if(dateString.trim()=="")return false;
+		          //年月日正则表达式
+		          var r=dateString.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/); 
+		          if(r==null){
+		          
+		             return false;
+		          }
+		          var d=new Date(r[1],r[3]-1,r[4]);   
+		          var num = (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]);
+		          if(num==0){
+		            return false;
+		          }
+		          return true;
+		          
+		        }; 
 
 			$career_area.on("click","a.add",function(e){
 				var item = $(this).parents('.career-data-item');
@@ -745,7 +764,7 @@ div.dataTables_wrapper {
 					});
 
 
-			$('#doRegist').bind(
+			$('#doRegist_test').bind(
 					'click',
 					function() {
 						// if (confirm("登録してよろしいですか？")) {
@@ -799,20 +818,28 @@ div.dataTables_wrapper {
 			});
 
 
-			$('#doRegist_byyuanyuan').bind(
+			$('#doRegist').bind(
 					'click',
 					function() {
 						var startdata = $(".career-area").find(".needreset");
 						var nalert = 0;
+						var nalert_format = 0;
 						$.each(startdata,function(j){
 							var value = startdata.eq(j).val();
 							if(value=="" || value==null){
 								nalert = 1;
 							}
+							if(!isDate(value)){
+								nalert_format = 1;
+							}
 
 						});
 						if(nalert){
 							alert("開始年月と終了年月は必須項目です");
+							return false;
+						}
+						if(nalert_format){
+							alert("開始年月と終了年月は正しい形式で入力してください");
 							return false;
 						}
 						// if (confirm("登録してよろしいですか？")) {
@@ -825,7 +852,9 @@ div.dataTables_wrapper {
 						// }
 					});
 
-		});
+
+	
+	});
 		/*]]>*/
 	</script>
 </body>
