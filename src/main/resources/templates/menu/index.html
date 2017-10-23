@@ -28,9 +28,14 @@ html, body {
 th, td {
 	white-space: nowrap;
 }
-
+.form-group {
+    padding: 20px;
+}
 div.dataTables_wrapper {
 	margin: 0 auto;
+}
+.btn {
+    padding: 6px 12px;
 }
 -->
 </style>
@@ -42,6 +47,7 @@ div.dataTables_wrapper {
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
+				<div><span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span></div>
 				<h1>メニュー画面</h1>
 			</section>
 
@@ -83,25 +89,25 @@ div.dataTables_wrapper {
 																</td>
 																<td class="col-md-2">
 																	<button type="button" class="btn btn-primary"
-																		style="width: 150px"
+																		
 																		th:onclick="'javascript:location.href='+'\''+@{/authorization/personjobhistory/goIndex/1}+'\''">
 																		従業員ジョブ歴史情報<br />管理
 																	</button>
 																</td>
-																<td class="col-md-2">
+																<!--<td class="col-md-2">
 																	<button type="button" class="btn btn-primary"
 																		style="width: 150px"
 																		th:onclick="'javascript:location.href='+'\''+@{/authorization/personcareer/goRegist}+'\''">
 																		キャリア情報<br />管理
 																	</button>
-																</td>
-																<td class="col-md-2">
+																</td>  -->
+																<!--<td class="col-md-2">
 																	<button type="button" class="btn btn-primary"
 																		style="width: 150px"
 																		th:onclick="'javascript:location.href='+'\''+@{/authorization/personcareer/goRegist/931}+'\''">
-																		キャリア情報 931<br />管理
+																		キャリア情報 931<br />管理 
 																	</button>
-																</td>
+																</td> -->
 																<td class="col-md-2"></td>
 																<td class="col-md-2"></td>
 															</tr>

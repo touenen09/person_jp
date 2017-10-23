@@ -36,7 +36,12 @@ div.dataTables_wrapper {
 .col-md-4 {
 	width: 30%;
 }
-
+.bolder-area .col-md-2{
+    font-weight: bolder;
+    width: 100px;
+    padding-right: 20px;
+    text-align: right;
+}
 .job-table .wl-10 {
 	background-color: #a9cfef;
 }
@@ -75,10 +80,22 @@ div.dataTables_wrapper {
 	border-top: none;
 }
 
+
 .career-area .add, .career-area .delete {
 	display: inline-block;
 	padding: 5px;
-	border: 1px solid #218807;
+	background: #e4e8ea;
+    font-size: 1em;
+    font-weight: bold;
+    background-image: -moz-linear-gradient(top, #ffffff 0%, #f1f3f4 3.64%, #e8ebed 50%, #e4e8ea 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(3.64%, #f1f3f4), color-stop(50%, #e8ebed), color-stop(100%, #e4e8ea));
+    background-image: -webkit-linear-gradient(top, #ffffff 0%, #f1f3f4 3.64%, #e8ebed 50%, #e4e8ea 100%);
+    background-image: -o-linear-gradient(top, #ffffff 0%, #f1f3f4 3.64%, #e8ebed 50%, #e4e8ea 100%);
+    background-image: -ms-linear-gradient(top, #ffffff 0%, #f1f3f4 3.64%, #e8ebed 50%, #e4e8ea 100%);
+    background-image: linear-gradient(to bottom, #ffffff 0%, #f1f3f4 3.64%, #e8ebed 50%, #e4e8ea 100%);
+    border: 1px solid #c4ced7;
+    color: #383838;
+    text-shadow: 0px 1px 0px #ffffff;
 	cursor: pointer;
 }
 
@@ -99,6 +116,7 @@ div.dataTables_wrapper {
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
+				<div><span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span></div>
 				<h1>キャリア情報入力画面</h1>
 			</section>
 
@@ -127,7 +145,7 @@ div.dataTables_wrapper {
 															<td class="col-md-2" rowspan="4"><img alt=""
 																th:src="*{personTableForm.photo}" height="160" width="120"></img></td>
 															<td class="col-md-10" colspan="5">
-																<table class="table-condensed"
+																<table class="table-condensed bolder-area"
 																	style="border: 0; margin: 0; cellSpacing: 0; cellPadding: 0; width: 100%;">
 																	<tr>
 																		<td class="col-md-2">従業員番号</td>
@@ -680,10 +698,10 @@ div.dataTables_wrapper {
 															<button type="button" id="goIndex"
 																class="btn btn-primary" style="width: 150px">ｷｬﾝｾﾙ</button>
 														</td>
-														<td class="col-md-2">
+														<!-- <td class="col-md-2">
 															<button id="doRegist_test" type="button"
 																class="btn btn-primary" th:style="${doRegistButtonCss}">登録NoCheck</button>
-														</td>
+														</td> -->
 													</tr>
 												</table>
 											</div>

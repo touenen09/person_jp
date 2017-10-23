@@ -46,7 +46,7 @@ public class PersonController {
 	public String goRegist(Model model) {
 
 		CssUtil.setButtonCss(model, ComConst.C_REGIST);
-		return "authorization/person/detail";
+		return "authorization/person/add";
 	}
 
 	@RequestMapping("/doRegist")

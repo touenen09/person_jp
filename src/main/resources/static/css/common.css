@@ -56,3 +56,72 @@ p.pageList a:active{
     color:#3c8dbc;
     text-decoration:underline;
 }
+
+#maincontent{
+    padding: 0px;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    
+}
+.demo-oracle-icon:before {
+    display: inline;
+}
+
+.demo-oracle-icon:before {
+     content: url(../images/oracle_logo.svg);
+}
+
+.oj-icon:before {
+   
+    box-sizing: content-box;
+}
+.demo-oracle-icon {
+    padding-right: 4px;
+}
+
+
+
+.oj-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+    overflow: hidden;
+    direction: ltr;
+    text-align: center;
+    box-sizing: content-box;
+}
+
+
+.demo-oracle-icon {
+    width: 137px;
+    height: 18px;
+}
+
+
+
+.btn-primary {
+	background-color:transparent;
+	background-image:-webkit-linear-gradient(bottom, #E4E8EA 0%, #E8EBED 50%, #f1f3f4 96.36%, #FFFFFF 100%);
+	min-height:28px;padding:3px 7px 4px 8px;
+	background-image: -ms-linear-gradient(bottom, #E4E8EA 0%, #E8EBED 50%, #f1f3f4 96.36%, #FFFFFF 100%);
+	background-image: -moz-linear-gradient(center bottom, #E4E8EA 0%, #E8EBED 50%, #f1f3f4 96.36%, #FFFFFF 100%);
+	background-image: -o-linear-gradient(bottom, #E4E8EA 0%, #E8EBED 50%, #f1f3f4 96.36%, #FFFFFF 100%);
+}
+
+.btn{    
+	white-space: nowrap;
+    color: #000000;
+    font-weight: bold;
+    text-shadow: none;
+    border: 1px solid #c4ced7;
+    border-radius: 3px;
+}
+.btn-primary:active,.btn-primary:hover{
+	border-color: #c4ced7;
+    background-color: #f7f8f9;
+    background-image: none;
+    color: #0572ce;
+    font-weight: bold;
+    text-shadow: none;
+}

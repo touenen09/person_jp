@@ -6,3 +6,43 @@
 .error-messages {
     color: #b94a48;
 }
+#maincontent{
+    padding: 0px;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    
+}
+.demo-oracle-icon:before {
+    display: inline;
+}
+
+.demo-oracle-icon:before {
+     content: url(../images/oracle_logo.svg);
+}
+
+.oj-icon:before {
+   
+    box-sizing: content-box;
+}
+.demo-oracle-icon {
+    padding-right: 4px;
+}
+
+
+
+.oj-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+    overflow: hidden;
+    direction: ltr;
+    text-align: center;
+    box-sizing: content-box;
+}
+
+
+.demo-oracle-icon {
+    width: 137px;
+    height: 18px;
+}
