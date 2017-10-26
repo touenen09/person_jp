@@ -26,7 +26,7 @@ html, body {
 
 /* Ensure that the demo table scrolls */
 th, td {
-	white-space: nowrap;
+	/*white-space: nowrap;*/
 }
 
 div.dataTables_wrapper {
@@ -55,11 +55,14 @@ div.dataTables_wrapper {
 
 .job-table li, .job-table-data li {
 	float: left;
-	width: 13%;
+	width: 14.3%;
 	padding: 5px 0.5%;
-	height: 32px;
+	
 	overflow: hidden;
 	line-height: 25px;
+}
+.job-table li{
+	height: 32px;
 }
 
 .job-table li.wl-10, .job-table-data li.wl-10 {
@@ -70,12 +73,21 @@ div.dataTables_wrapper {
 	border-top: none;
 }
 
+.career-area .col-md-5 {
+    width: 12%;
+}
+.career-area .col-md-1 {
+    width: 9%;
+}
+.wl-20 {
+    width: 22% !important;
+}
 .wl-15 {
-	width: 15%;
+	width: 5%!important;
 }
 
 .career-area {
-	padding: 30px;
+	padding: 30px 0 30px 30px;
 	border: 1px solid;
 	border-top: none;
 }
@@ -209,7 +221,7 @@ div.dataTables_wrapper {
 																<li class="wl-10">発令日</li>
 																<li class="wl-10">異動区分</li>
 																<li class="wl-10">異動理由</li>
-																<li class="wl-10">所属</li>
+																<li class="wl-10 wl-20">所属</li>
 																<li class="wl-10">役職</li>
 																<li class="wl-10">勤務地</li>
 																<li class="wl-15"><a href="javascript:void(0)"
@@ -233,7 +245,7 @@ div.dataTables_wrapper {
 																		th:text="*{personCareerDataSyumuHeader.actionName}"></li>
 																	<li class="wl-10"
 																		th:text="*{personCareerDataSyumuHeader.actionReasonName}"></li>
-																	<li class="wl-10"
+																	<li class="wl-10 wl-20"
 																		th:text="*{personCareerDataSyumuHeader.department}"></li>
 																	<li class="wl-10"
 																		th:text="*{personCareerDataSyumuHeader.job}"></li>
@@ -255,13 +267,13 @@ div.dataTables_wrapper {
 																			<td class="col-md-1">開始年月</td>
 																			<td class="col-md-1">終了年月</td>
 																			<td class="col-md-1">担当商品</td>
-																			<td class="col-md-1">担当商品詳細</td>
+																			<td class="col-md-5">担当商品詳細</td>
 																			<td class="col-md-1">担当機能</td>
-																			<td class="col-md-1">担当機能詳細</td>
+																			<td class="col-md-5">担当機能詳細</td>
 																			<td class="col-md-1">勤務地</td>
 																			<td class="col-md-1">更新日時</td>
 																			<td class="col-md-1">更新ユーザー</td>
-																			<td class="col-md-1"></td>
+																			<td class="wl-15"></td>
 																		</tr>
 
 
@@ -281,7 +293,7 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].effectiveDate'"
 																				th:value="${content.effectiveDate}" />
 																			<td class="col-md-1"><input type="text"
-																				class="form-control needreset"
+																				class="form-control needreset neednotnull"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].startDateString'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].startDateString'"
 																				th:value="${content.startDateString}" maxlength="20" /></td>
@@ -301,7 +313,7 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-5"><select
 																				class="form-control"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].productDetail'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].productDetail'"
@@ -322,7 +334,7 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.function}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-5"><select
 																				class="form-control"
 																				th:id="'personCareerDataSyumuDetailList['+${iterStat.index}+'].functionDetail'"
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].functionDetail'"
@@ -351,7 +363,7 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataSyumuDetailList['+${iterStat.index}+'].userId'"
 																				th:value="${content.userId}"
 																				th:text="${content.userId}"></td>
-																			<td><a href="javascript:void(0)" class="add">+</a>
+																			<td class="wl-15"><a href="javascript:void(0)" class="add">+</a>
 																				<span class="delete">-</span></td>
 																		</tr>
 																		<!-- end loop3 -->
@@ -379,7 +391,7 @@ div.dataTables_wrapper {
 																		th:text="${contentAll.personJobHistoryTableExt.actionName}"></li>
 																	<li class="wl-10"
 																		th:text="${contentAll.personJobHistoryTableExt.actionReasonName}"></li>
-																	<li class="wl-10"
+																	<li class="wl-10 wl-20"
 																		th:text="${contentAll.personJobHistoryTableExt.department}"></li>
 																	<li class="wl-10"
 																		th:text="${contentAll.personJobHistoryTableExt.job}"></li>
@@ -397,13 +409,13 @@ div.dataTables_wrapper {
 																			<td class="col-md-1">開始年月</td>
 																			<td class="col-md-1">終了年月</td>
 																			<td class="col-md-1">担当商品</td>
-																			<td class="col-md-1">担当商品詳細</td>
+																			<td class="col-md-5">担当商品詳細</td>
 																			<td class="col-md-1">担当機能</td>
-																			<td class="col-md-1">担当機能詳細</td>
+																			<td class="col-md-5">担当機能詳細</td>
 																			<td class="col-md-1">勤務地</td>
 																			<td class="col-md-1">更新日時</td>
 																			<td class="col-md-1">更新ユーザー</td>
-																			<td class="col-md-1"></td>
+																			<td class="wl-15"></td>
 																		</tr>
 																		<tr class="career-data-item"
 																			th:each="content, iterStat : ${contentAll.personCareerDataExtHistoryList}">
@@ -420,7 +432,7 @@ div.dataTables_wrapper {
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].effectiveDate'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].effectiveDate'"
 																				th:value="${content.effectiveDate}" /> <input
-																				type="text" class="form-control needreset"
+																				type="text" class="form-control needreset  neednotnull"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].startDateString'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].startDateString'"
 																				th:value="${content.startDateString}" maxlength="20" /></td>
@@ -440,7 +452,7 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-5"><select
 																				class="form-control"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].productDetail'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].productDetail'"
@@ -461,7 +473,7 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.function}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-5"><select
 																				class="form-control"
 																				th:id="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].functionDetail'"
 																				th:name="'personCareerDataSyumuHistoryList['+${iterStatAll.index}+'].personCareerDataExtHistoryList['+${iterStat.index}+'].functionDetail'"
@@ -492,7 +504,7 @@ div.dataTables_wrapper {
 																				th:text="${content.userId}"></td>
 
 
-																			<td><a href="javascript:void(0)" class="add">+</a>
+																			<td class="wl-15"><a href="javascript:void(0)" class="add">+</a>
 																				<span class="delete">-</span></td>
 																		</tr>
 
@@ -515,7 +527,7 @@ div.dataTables_wrapper {
 													<!-- kennmu -->
 
 													<div
-														th:attrappend="style=*{personCareerDataKenmuHeader == null ? 'display: none;' : ''}">
+														th:if="*{personCareerDataKenmuHeader != null}">
 														<div class="col-md-1">兼務</div>
 														<div class="col-md-11">
 
@@ -527,7 +539,7 @@ div.dataTables_wrapper {
 																<li class="wl-10">発令日</li>
 																<li class="wl-10">異動区分</li>
 																<li class="wl-10">異動理由</li>
-																<li class="wl-10">所属</li>
+																<li class="wl-10 wl-20">所属</li>
 																<li class="wl-10">役職</li>
 																<li class="wl-10">勤務地</li>
 																<li class="wl-15"></li>
@@ -548,7 +560,7 @@ div.dataTables_wrapper {
 																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.actionName}):''"></li>
 																	<li class="wl-10"
 																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.actionReasonName}):''"></li>
-																	<li class="wl-10"
+																	<li class="wl-10 wl-20"
 																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.department}):''"></li>
 																	<li class="wl-10"
 																		th:text="*{personCareerDataKenmuHeader}!=null?(*{personCareerDataKenmuHeader.job}):''"></li>
@@ -570,13 +582,13 @@ div.dataTables_wrapper {
 																			<td class="col-md-1">開始年月</td>
 																			<td class="col-md-1">終了年月</td>
 																			<td class="col-md-1">担当商品</td>
-																			<td class="col-md-1">担当商品詳細</td>
+																			<td class="col-md-5">担当商品詳細</td>
 																			<td class="col-md-1">担当機能</td>
-																			<td class="col-md-1">担当機能詳細</td>
+																			<td class="col-md-5">担当機能詳細</td>
 																			<td class="col-md-1">勤務地</td>
 																			<td class="col-md-1">更新日時</td>
 																			<td class="col-md-1">更新ユーザー</td>
-																			<td class="col-md-1"></td>
+																			<td class="wl-15"></td>
 																		</tr>
 
 
@@ -595,7 +607,7 @@ div.dataTables_wrapper {
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].effectiveDate'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].effectiveDate'"
 																				th:value="${content.effectiveDate}" /><input
-																				type="text" class="form-control needreset"
+																				type="text" class="form-control needreset  neednotnull"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].startDateString'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].startDateString'"
 																				th:value="${content.startDateString}" maxlength="20" /></td>
@@ -615,7 +627,7 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.product}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-5"><select
 																				class="form-control"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].productDetail'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].productDetail'"
@@ -636,7 +648,7 @@ div.dataTables_wrapper {
 																						th:value="${conf.code}" th:text="${conf.name}"
 																						th:selected="${conf.code} == ${content.function}"></option>
 																			</select></td>
-																			<td class="col-md-1"><select
+																			<td class="col-md-5"><select
 																				class="form-control"
 																				th:id="'personCareerDataKenmuDetailList['+${iterStat.index}+'].functionDetail'"
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].functionDetail'"
@@ -665,7 +677,7 @@ div.dataTables_wrapper {
 																				th:name="'personCareerDataKenmuDetailList['+${iterStat.index}+'].userId'"
 																				th:value="${content.userId}"
 																				th:text="${content.userId}"></td>
-																			<td><a href="javascript:void(0)" class="add">+</a>
+																			<td class="wl-15"><a href="javascript:void(0)" class="add">+</a>
 																				<span class="delete">-</span></td>
 																		</tr>
 																		<!-- end loop3 -->
@@ -874,7 +886,7 @@ div.dataTables_wrapper {
 			$('#doRegist').bind(
 					'click',
 					function() {
-						var startdata = $(".career-area").find(".needreset");
+						var startdata = $(".career-area").find(".neednotnull");
 						var nalert = 0;
 						var nalert_format = 0;
 						$.each(startdata,function(j){
@@ -888,11 +900,11 @@ div.dataTables_wrapper {
 
 						});
 						if(nalert){
-							alert("開始年月と終了年月は必須項目です");
+							alert("開始年月は必須項目です");
 							return false;
 						}
 						if(nalert_format){
-							alert("開始年月と終了年月は正しい形式で入力してください");
+							alert("開始年月は正しい形式で入力してください");
 							return false;
 						}
 						// if (confirm("登録してよろしいですか？")) {
@@ -904,6 +916,23 @@ div.dataTables_wrapper {
 							// doNothing
 						// }
 					});
+			
+			
+			var maxhei = 0;
+			 $('.job-table-data').each(function() {
+				 var hei = $(this).height();
+               	if(hei >= 25){
+               		maxhei = hei;
+               	}
+                 var the_li = $(this).children('li');
+                 $.each(the_li,function(j){
+						
+						//debugger
+						the_li.eq(j).css("height",maxhei);
+
+				});
+             });
+
 
 	});
 		/*]]>*/
